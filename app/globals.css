@@ -8,7 +8,7 @@
   --background-end-rgb: 255, 255, 255;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
@@ -24,4 +24,74 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+} */
+
+@layer components {
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  .qty-count--minus {
+    border-right: 1px solid #e2e2e2;
+  }
+  .qty-count--add {
+    border-left: 1px solid #e2e2e2;
+  }
+  .qty-count--add:after {
+    transform: rotate(90deg);
+  }
+  .qty-input {
+    border: 1px solid #e2e2e2;
+  }
+  .showcase-btn {
+    padding: 0.5rem 3.4rem;
+    border: 1px solid #e2e2e2;
+  }
+
+  details[open] summary ~ * {
+    animation: open 0.3s ease-in-out;
+  }
+
+  @keyframes open {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  details summary {
+    width: 100%;
+    position: relative;
+    cursor: pointer;
+    list-style: none;
+    background-color: #f3f4f6;
+  }
+
+  details summary:after {
+    content: "+";
+    color: black;
+    position: absolute;
+    font-size: 1.75rem;
+    line-height: 0;
+    margin-top: 0.75rem;
+    top: 7px;
+    right: 10px;
+    font-weight: 200;
+    transform-origin: center;
+    transition: 200ms linear;
+  }
+  details[open] summary:after {
+    transform: rotate(45deg);
+    color: #f3f4f6;
+  }
+  details[open] summary {
+    background-color: #030712;
+    color: white;
+  }
+  details summary {
+    outline: 0;
+  }
 }
