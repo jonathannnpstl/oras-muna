@@ -29,7 +29,7 @@ export default function ProductShowcase() {
           <Image
             src="/img/audemars-piguet/audemars-piguet-1.webp"
             width={500}
-            height={700}
+            height={600}
             className="h-48 w-full object-contain sm:h-full sm:max-w-xs m-auto aspect-auto"
             alt="An audemars piguet watch"
           />

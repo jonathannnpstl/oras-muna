@@ -4,6 +4,8 @@ import Image from "next/image";
 import { Dialog, Transition } from "@headlessui/react";
 import EditQtyButton from "./edit-qty-button";
 import CloseButton from "./close-cart-button";
+import OpenCart from "./open-cart-button";
+import DeleteItemButton from "./delete-item-button";
 
 export default function Cart() {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,7 +15,7 @@ export default function Cart() {
   return (
     <>
       <button aria-label="Open cart" onClick={openCart}>
-        {/* <OpenCart quantity={c} /> */}Open
+        <OpenCart />
       </button>
       <Transition show={isOpen}>
         <Dialog onClose={closeCart} className="relative z-50">
@@ -37,7 +39,7 @@ export default function Cart() {
             leaveFrom="translate-x-0"
             leaveTo="translate-x-full"
           >
-            <Dialog.Panel className="fixed bottom-0 right-0 top-0 flex h-full w-full flex-col border-l border-neutral-200 bg-white p-6 text-black backdrop-blur-xl dark:text-white md:w-[390px]">
+            <Dialog.Panel className=" fixed bottom-0 right-0 top-0 flex h-full w-full flex-col border-l border-neutral-200 bg-white p-6 text-black backdrop-blur-xl dark:text-white md:w-[390px]">
               <div
                 className="flex items-center justify-between text-gray-800
 text-gray-800"
@@ -53,7 +55,7 @@ text-gray-800"
                   <li className="flex w-full flex-col border-b border-neutral-300 dark:border-neutral-700">
                     <div className="relative flex w-full flex-row justify-between px-1 py-4 text-gray-800">
                       <div className="absolute z-40 -mt-2 ml-[55px]">
-                        {/* <DeleteItemButton item={item} /> */}x
+                        <DeleteItemButton />
                       </div>
                       {/* <Link
                               href={merchandiseUrl}

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import { Lato } from "next/font/google";
 import "./globals.css";
+import { Suspense } from "react";
+import Navbar from "@/components/navbar";
 
 const lato = Lato({ subsets: ["latin"], weight: ["400", "700"] });
 
@@ -17,7 +18,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={lato.className}>{children}</body>
+      <body className={lato.className}>
+        {/* <Navbar /> */}
+        <Suspense>
+          <main>{children}</main>
+        </Suspense>
+      </body>
     </html>
   );
 }

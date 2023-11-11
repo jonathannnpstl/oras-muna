@@ -1,13 +1,14 @@
-import Cart from "@/components/cart";
-import ProductShowcase from "@/components/product-showcase";
+import Filter from "@/components/filter";
 import ProductsContent from "@/components/products-content";
-import Image from "next/image";
+import { CardsSkeleton } from "@/components/skeleton";
+import { Suspense } from "react";
 
 export default function Home() {
   return (
-    <main>
-      <ProductShowcase />
-      <Cart />
-    </main>
+    <>
+      <Suspense fallback={<CardsSkeleton />}>
+        <ProductsContent />
+      </Suspense>
+    </>
   );
 }
