@@ -27,6 +27,15 @@ body {
 } */
 
 @layer components {
+  .card-child::before {
+    opacity: 0;
+    transition: all 0.5s;
+  }
+
+  .card:hover .card-child::before {
+    opacity: 1;
+  }
+
   input[type="number"]::-webkit-inner-spin-button,
   input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;

@@ -2,7 +2,7 @@ import { fetchProducts } from "@/lib/api/data";
 import CartModal from "./modal";
 
 export default async function Cart() {
-  const product = await fetchProducts();
+  // const product = await fetchProducts();
 
-  return <CartModal product={JSON.parse(product)} />;
+  return <CartModal />;
 }

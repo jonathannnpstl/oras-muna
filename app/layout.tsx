@@ -3,6 +3,7 @@ import { Lato } from "next/font/google";
 import "./globals.css";
 import { Suspense } from "react";
 import Navbar from "@/components/navbar";
+import Footer from "@/components/footer";
 
 const lato = Lato({ subsets: ["latin"], weight: ["400", "700"] });
 
@@ -21,8 +22,9 @@ export default function RootLayout({
       <body className={lato.className}>
         <Navbar />
         <Suspense>
-          <main>{children}</main>
+          <main className="max-w-6xl m-auto">{children}</main>
         </Suspense>
+        <Footer />
       </body>
     </html>
   );

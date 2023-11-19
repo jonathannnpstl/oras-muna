@@ -13,7 +13,6 @@ export default function ProductShowcase({ product }: any) {
     e.preventDefault();
     setOpenDetailId(id !== openDetailId ? id : "");
   };
-  console.log(product[0]);
 
   const handleQuantity = (operation: "-" | "+") => {
     if (operation === "-" && quantity > 1) {
@@ -25,7 +24,7 @@ export default function ProductShowcase({ product }: any) {
   };
 
   return (
-    <div className="max-h max-w-6xl">
+    <div className="max-h max-full">
       <div className="md:flex ">
         <div className="sm:shrink-0 grow shrink basis-0 p-6 self-start">
           <Image

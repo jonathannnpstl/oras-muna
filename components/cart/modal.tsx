@@ -75,12 +75,10 @@ text-gray-800"
                       </div>
 
                       <div className="text-base flex flex-1 flex-col text-base ml-2">
-                        <span className="leading-tight">{product[0].name}</span>
+                        <span className="leading-tight">s</span>
                       </div>
                       <div className="">
-                        <p className="text-right text-base">
-                          ${product[0].price} USD
-                        </p>
+                        <p className="text-right text-base">$140000 USD</p>
                         <div className="ml-auto flex h-9 flex-row items-center  border">
                           <EditQtyButton operation={"minus"} />
                           <p className="w-6 text-center">
