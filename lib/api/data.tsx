@@ -7,8 +7,9 @@ export async function fetchProducts(): Promise<any | undefined> {
 
     const movies = await db.collection("products").find({}).limit(10).toArray();
 
-    return movies;
+    return JSON.stringify(movies);
   } catch (e) {
     console.error(e);
   }
 }
+

@@ -4,5 +4,5 @@ import CartModal from "./modal";
 export default async function Cart() {
   const product = await fetchProducts();
 
-  return <CartModal product={product} />;
+  return <CartModal product={JSON.parse(product)} />;
 }
