@@ -15,7 +15,7 @@ export default function Filter() {
   };
   return (
     <div className="p-3 overflow-hidden">
-      <div className="w-[250px] bg-gray-100 h-full text-gray-600 text-base p-3 flex flex-col gap-3">
+      <div className="w-[250px] bg-gray-100 h-full text-gray-600 font- text-base p-3 flex flex-col gap-3">
         <div className="my-2">
           <p className="font-bold my-2">Brand</p>
           <label
@@ -23,52 +23,52 @@ export default function Filter() {
             className="flex items-center gap-3 my-4 px-3 p-0.5"
           >
             <input
-              id="red-checkbox"
+              id="Audemars Piguet"
               type="checkbox"
-              value="Audemars Piguet"
+              value=""
               name="Audemars Piguet"
-              className="w-4 h-4 accent-black "
+              className="w-4 h-4 accent-black"
             />
             Audemars Piguet
           </label>
           <label
-            htmlFor="Audemars Piguet"
+            htmlFor="Patek Philippe"
             className="flex items-center gap-3 my-4 px-3 p-0.5"
           >
             <input
-              id="red-checkbox"
+              id="Patek Philippe"
               type="checkbox"
-              value="Audemars Piguet"
-              name="Audemars Piguet"
+              value=""
+              name="Patek Philippe"
               className="w-4 h-4 accent-black "
             />
-            Audemars Piguet
+            Patek Philippe
           </label>
           <label
-            htmlFor="Audemars Piguet"
+            htmlFor="Richard Mille"
             className="flex items-center gap-3 my-4 px-3 p-0.5"
           >
             <input
-              id="red-checkbox"
+              id="Richard Mille"
               type="checkbox"
-              value="Audemars Piguet"
-              name="Audemars Piguet"
+              value=""
+              name="Richard Mille"
               className="w-4 h-4 accent-black "
             />
-            Audemars Piguet
+            Richard Mille
           </label>
           <label
-            htmlFor="Audemars Piguet"
+            htmlFor="Rolex"
             className="flex items-center gap-3 my-4 px-3 p-0.5"
           >
             <input
-              id="red-checkbox"
+              id="Rolex"
               type="checkbox"
-              value="Audemars Piguet"
-              name="Audemars Piguet"
+              value=""
+              name="Rolex"
               className="w-4 h-4 accent-black "
             />
-            Audemars Piguet
+            Rolex
           </label>
         </div>
         <div className="my-2">

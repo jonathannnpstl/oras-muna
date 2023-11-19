@@ -9,6 +9,7 @@ export default function Home() {
       <Suspense fallback={<CardsSkeleton />}>
         <ProductsContent />
       </Suspense>
+      {/* <CardsSkeleton /> */}
     </>
   );
 }

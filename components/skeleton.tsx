@@ -2,8 +2,8 @@ import React from "react";
 
 export default function CardSkeleton() {
   return (
-    <div className="animate-pulse w-[150px] sm:w-[200px] relative overflow-hidden  bg-gray-100 overflow-hidden shadow-md">
-      <div className=" bg-gray-200 h-[210px]"></div>
+    <div className="animate-pulse w-full relative overflow-hidden  bg-gray-100 overflow-hidden shadow-md">
+      <div className="bg-gray-200 w-full h-[200px] aspect-auto"></div>
       <div className="m-2 h-7 w-10/12 bg-gray-200"></div>
       <div className="m-2 h-7 w-1/3 bg-gray-300"></div>
     </div>
@@ -12,7 +12,7 @@ export default function CardSkeleton() {
 
 export function CardsSkeleton() {
   return (
-    <div className="grid grid-cols-auto gap-4">
+    <div className="grid grid-cols-auto gap-4 w-full">
       <CardSkeleton />
       <CardSkeleton />
       <CardSkeleton />
