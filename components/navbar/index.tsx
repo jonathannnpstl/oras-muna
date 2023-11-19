@@ -6,7 +6,7 @@ import OpenCart from "../cart/open-cart-button";
 
 export default function Navbar() {
   return (
-    <nav className="w-full top-0 left-0 fixed flex items-center bg-white shadow justisfy-between p-4 lg:px-6">
+    <nav className="z-10 w-full top-0 left-0 fixed flex items-center bg-white shadow justisfy-between p-4 lg:px-6">
       <div className="block flex-none md:hidden">
         <MobileNav />
       </div>
