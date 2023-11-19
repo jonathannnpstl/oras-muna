@@ -5,7 +5,7 @@ import Details from "./details";
 import AddToCartButton from "../cart/add-to-cart-button";
 import EditQtyButton from "../cart/edit-qty-button";
 
-export default function ProductShowcase() {
+export default function ProductShowcase({ product }: any) {
   const details = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }];
   const [quantity, setQuantity] = useState<number>(1);
   const [openDetailId, setOpenDetailId] = useState<number | string>("");
@@ -13,6 +13,8 @@ export default function ProductShowcase() {
     e.preventDefault();
     setOpenDetailId(id !== openDetailId ? id : "");
   };
+  console.log(product[0]);
+
   const handleQuantity = (operation: "-" | "+") => {
     if (operation === "-" && quantity > 1) {
       setQuantity(quantity - 1);

@@ -7,5 +7,5 @@ export default function ProductsContent() {
     // element in this array. see: https://reactjs.org/docs/lists-and-keys.html
     rows.push(<ProductCard key={i} />);
   }
-  return <div className="grid grid-cols-auto gap-4">{rows}</div>;
+  return <div className="grid w-full grid-cols-auto gap-4">{rows}</div>;
 }
