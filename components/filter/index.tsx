@@ -117,6 +117,16 @@ export default function Filter() {
               }}
             />
           </div>
+          <div>
+            <label htmlFor="descending">
+              <input type="radio" name="price" id="descending" />
+              Highest to Lowest
+            </label>
+            <label htmlFor="ascending">
+              <input type="radio" name="price" id="ascending" />
+              Lowest to Highest
+            </label>
+          </div>
         </div>
       </div>
     </div>

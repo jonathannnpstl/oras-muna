@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function Banner() {
   return (
-    <div className="w-full grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-2 aspect-square ">
+    <div className="w-full grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-2 aspect-square justify-center items-center">
       <div className="md:row-span-3 md:col-span-3 w-full h-full aspect-square object-contain relative">
         <a
           href=""
@@ -72,8 +72,10 @@ export default function Banner() {
           ></Image>
         </a>
       </div>
-      <div>
-        <p>See more watches -</p>
+      <div className="text-center text-lg tracking-wide">
+        <a href="">
+          <p>See more watches -</p>
+        </a>
       </div>
     </div>
   );

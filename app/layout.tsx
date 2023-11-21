@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Lato } from "next/font/google";
+import { Lato, Antic_Didone } from "next/font/google";
 import "./globals.css";
 import { Suspense } from "react";
 import Navbar from "@/components/navbar";

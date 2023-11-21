@@ -26,6 +26,8 @@ body {
     rgb(var(--background-start-rgb));
 } */
 
+
+
 @layer components {
   .card-child::before {
     opacity: 0;
