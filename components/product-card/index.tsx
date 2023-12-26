@@ -1,14 +1,14 @@
 import { Product } from "@/lib/definition";
 import Image from "next/image";
 import Link from "next/link";
-import { transformString } from "@/lib/utils";
+import { transformStringLower } from "@/lib/utils";
 
 export default function ProductCard({ product }: { product: Product }) {
   const { brand, name, img, price } = product;
 
   return (
     <div className="card w-full max-h-fit relative overflow-hidden cursor-pointer text-center">
-      <Link href={`/product/${transformString(name)}`}>
+      <Link href={`/product/${transformStringLower(name)}`}>
         <div className="w-full px-10 pt-2 ">
           <Image
             src={`/img/${img}`}

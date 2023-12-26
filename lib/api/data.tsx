@@ -1,4 +1,4 @@
-import clientPromise from "../utils";
+import clientPromise from "../connection";
 
 export async function fetchProducts({
   query,
@@ -13,6 +13,27 @@ export async function fetchProducts({
     const products = await db
       .collection("products")
       .find({ name: { $regex: regex } })
+      .limit(10)
+      .toArray();
+
+    return JSON.parse(JSON.stringify(products));
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+export async function fetchBrandProducts({
+  brand,
+}: {
+  brand?: string;
+}): Promise<any | undefined> {
+  try {
+    const client = await clientPromise;
+    const db = client.db("oras-muna-db");
+
+    const products = await db
+      .collection("products")
+      .find({ brand: brand })
       .limit(10)
       .toArray();
 
