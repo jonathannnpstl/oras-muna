@@ -1,29 +1,30 @@
-"use client";
+// "use client";
 import React, { useState } from "react";
 import Slider from "@mui/material/Slider";
 import { grey } from "@mui/material/colors";
+import { FilterItemList } from "./item";
 import { getBrands } from "@/lib/api/data";
-import clsx from "clsx";
 
-export default async function Filter() {
-  const brands = await getBrands();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const active = pathname === item.path;
+async function BrandsList() {
+  const collections = await getBrands();
+  return <FilterItemList list={collections} title="Collections" />;
+}
+
+export default function Filter() {
   const color = grey[900];
   function valuetext(value: number) {
     return `${value}$`;
   }
-  const [value, setValue] = useState<number[]>([1500000, 4000000]);
-  const handleChange = (event: Event, newValue: number | number[]) => {
-    setValue(newValue as number[]);
-  };
+  // const [value, setValue] = useState<number[]>([1500000, 4000000]);
+  // const handleChange = (event: Event, newValue: number | number[]) => {
+  //   setValue(newValue as number[]);
+  // };
   return (
     <div className="p-3 overflow-hidden">
-      <div className="w-[250px] bg-gray-100 h-full text-gray-600 font- text-base p-3 flex flex-col gap-3">
+      <div className="w-[250px] bg-gray-100 h-full text-gray-600  text-base p-3 flex flex-col gap-3">
         <div className="my-2">
           <p className="font-bold my-2">Brand</p>
-          <label
+          {/* <label
             htmlFor="Audemars Piguet"
             className="flex items-center gap-3 my-4 px-3 p-0.5"
           >
@@ -32,12 +33,7 @@ export default async function Filter() {
               type="checkbox"
               value=""
               name="Audemars Piguet"
-              className={clsx(
-                "w-full hover:underline w-4 h-4 accent-black hover:underline-offset-4",
-                {
-                  "underline underline-offset-4": active,
-                }
-              )}
+              className="w-4 h-4 accent-black"
             />
             Audemars Piguet
           </label>
@@ -79,11 +75,12 @@ export default async function Filter() {
               className="w-4 h-4 accent-black "
             />
             Rolex
-          </label>
+          </label> */}
+          <BrandsList />
         </div>
         <div className="my-2">
           <p className="font-bold my-1">Price</p>
-          <div className="flex items-center gap-4 justify-center my-4 relative">
+          {/* <div className="flex items-center gap-4 justify-center my-4 relative">
             <label htmlFor="min-range">
               <p className="text-sm">Min.</p>
               <input
@@ -126,7 +123,7 @@ export default async function Filter() {
                 },
               }}
             />
-          </div>
+          </div> */}
           <div>
             <label htmlFor="descending">
               <input type="radio" name="price" id="descending" />
