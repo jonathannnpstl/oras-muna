@@ -1,10 +1,15 @@
 import React from "react";
 import ProductsContent from "../products-content";
 import { Antic_Didone } from "next/font/google";
+import { Product } from "@/lib/definition";
 
 const antic_didone = Antic_Didone({ subsets: ["latin"], weight: "400" });
 
-export default function ProductsFetured() {
+export default function ProductsFeatured({
+  products,
+}: {
+  products: Product[];
+}) {
   return (
     <>
       <div className="text-8xl antialiased tracking-wide my-40">
@@ -14,7 +19,7 @@ export default function ProductsFetured() {
         </h2>
       </div>
       <p className="text-lg">Featured</p>
-      <ProductsContent />
+      <ProductsContent products={products} />
     </>
   );
 }

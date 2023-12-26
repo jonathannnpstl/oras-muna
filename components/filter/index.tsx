@@ -1,10 +1,15 @@
 "use client";
 import React, { useState } from "react";
 import Slider from "@mui/material/Slider";
-import Box from "@mui/material/Box";
 import { grey } from "@mui/material/colors";
+import { getBrands } from "@/lib/api/data";
+import clsx from "clsx";
 
-export default function Filter() {
+export default async function Filter() {
+  const brands = await getBrands();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const active = pathname === item.path;
   const color = grey[900];
   function valuetext(value: number) {
     return `${value}$`;
@@ -27,7 +32,12 @@ export default function Filter() {
               type="checkbox"
               value=""
               name="Audemars Piguet"
-              className="w-4 h-4 accent-black"
+              className={clsx(
+                "w-full hover:underline w-4 h-4 accent-black hover:underline-offset-4",
+                {
+                  "underline underline-offset-4": active,
+                }
+              )}
             />
             Audemars Piguet
           </label>
