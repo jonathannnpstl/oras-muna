@@ -5,19 +5,19 @@ import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
 import { ReadonlyURLSearchParams } from "next/navigation";
 
+const createUrl = (
+  pathname: string,
+  params: URLSearchParams | ReadonlyURLSearchParams
+) => {
+  const paramsString = params.toString();
+  const queryString = `${paramsString.length ? "?" : ""}${paramsString}`;
+
+  return `${pathname}${queryString}`;
+};
+
 export default function Search() {
   const router = useRouter();
   const searchParams = useSearchParams();
-
-  const createUrl = (
-    pathname: string,
-    params: URLSearchParams | ReadonlyURLSearchParams
-  ) => {
-    const paramsString = params.toString();
-    const queryString = `${paramsString.length ? "?" : ""}${paramsString}`;
-
-    return `${pathname}${queryString}`;
-  };
 
   // const handleSearch = useDebouncedCallback((term) => {
   //   const params = new URLSearchParams(searchParams);
@@ -29,6 +29,7 @@ export default function Search() {
 
   //   replace(`search?${params.toString()}`);
   // }, 500);
+  const pathName = usePathname();
 
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -42,23 +43,24 @@ export default function Search() {
     } else {
       newParams.delete("query");
     }
-    router.push(createUrl("/search", newParams));
+    if (pathName.includes("search")) {
+      router.push(createUrl(pathName, newParams));
+    } else {
+      router.push(createUrl("/search", newParams));
+    }
   }
+
   return (
     <form
       onSubmit={onSubmit}
       className="w-max-[850px] relative w-full xl:w-full"
     >
       <input
-        // key={searchParams?.get('q')}
+        key={searchParams?.get("query")}
         type="text"
         name="search"
         placeholder="Search products..."
         autoComplete="off"
-        // onChange={(e) => {
-        //   handleSearch(e.target.value);
-        // }}
-        // defaultValue={searchParams?.get("q") || ""}
         defaultValue={searchParams.get("query")?.toString()}
         className="w-full border-b outline-none bg-white px-4 py-2 text-sm text-black border-gray-900 placeholder:border-gray-600"
       />

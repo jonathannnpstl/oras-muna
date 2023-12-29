@@ -26,8 +26,6 @@ body {
     rgb(var(--background-start-rgb));
 } */
 
-
-
 @layer components {
   .card-child::before {
     opacity: 0;
@@ -108,5 +106,62 @@ body {
   }
   details summary {
     outline: 0;
+  }
+
+  .sort {
+    position: relative;
+  }
+
+  .sort span {
+    min-width: 135px;
+    padding: 5px 15px;
+    color: rgb(30 41 59);
+    font-size: 1em;
+    cursor: pointer;
+    display: block;
+  }
+
+  .sort span::after {
+    float: right;
+    right: 10%;
+    content: "+";
+    transform-origin: center;
+    transition: 200ms linear;
+  }
+
+  .sort .slide {
+    position: absolute;
+    clear: both;
+    width: 100%;
+    height: 0px;
+    overflow: hidden;
+    text-align: center;
+    transition: height 0.4s ease;
+    z-index: 9;
+  }
+
+  .sort .slide li {
+    color: rgb(30 41 59);
+    padding: 5px 15px;
+    background: white;
+    font-size: 0.8rem;
+  }
+
+  .sort .slide li:hover {
+    background-color: rgb(229 231 235);
+  }
+
+  #touch {
+    position: absolute;
+    opacity: 0;
+    height: 0px;
+  }
+
+  #touch:checked + .slide {
+    height: 300px;
+  }
+
+  #touch:checked + span::after {
+    transform: rotate(45deg);
   }
 }

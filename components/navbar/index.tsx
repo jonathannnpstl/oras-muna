@@ -13,7 +13,7 @@ export default function Navbar() {
       <div className="flex md:w-1/3 items-center justify-around">
         <div className="flex w-full md:w-1/3">
           <div className="ml-2 flex-none text-xl font-medium uppercase md:hidden lg:block">
-            Oras-Muna
+            <a href="/">Oras-Muna</a>
           </div>
         </div>
         <ul className="hidden gap-8 text-sm md:flex md:items-center">
