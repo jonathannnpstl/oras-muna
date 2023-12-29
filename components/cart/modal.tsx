@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef, Fragment } from "react";
+import React, { useState, useRef, Fragment, useEffect } from "react";
 import Image from "next/image";
 import { Dialog, Transition } from "@headlessui/react";
 import EditQtyButton from "./edit-qty-button";
@@ -7,13 +7,24 @@ import CloseButton from "./close-cart-button";
 import OpenCart from "./open-cart-button";
 import DeleteItemButton from "./delete-item-button";
 
-export default function CartModal({ product }: any) {
-  console.log(product);
-
+export default function CartModal({ cart }: any) {
   const [isOpen, setIsOpen] = useState(false);
   const quantityRef = useRef();
   const openCart = () => setIsOpen(true);
   const closeCart = () => setIsOpen(false);
+  useEffect(() => {
+    // Open cart modal when quantity changes.
+    if (cart?.totalQuantity !== quantityRef.current) {
+      // But only if it's not already open (quantity also changes when editing items in cart).
+      if (!isOpen) {
+        setIsOpen(true);
+      }
+
+      // Always update the quantity reference
+      quantityRef.current = cart?.totalQuantity;
+    }
+  }, [isOpen, cart?.totalQuantity, quantityRef]);
+
   return (
     <>
       <button aria-label="Open cart" onClick={openCart}>
