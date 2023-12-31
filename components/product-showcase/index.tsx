@@ -14,11 +14,14 @@ export default function ProductShowcase({ product }: any) {
     setOpenDetailId(id !== openDetailId ? id : "");
   };
 
-  const handleQuantity = (operation: "-" | "+") => {
-    if (operation === "-" && quantity > 1) {
+  const handleQuantity = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    const type = e.currentTarget.getAttribute("data-type");
+
+    if (type && type === "minus" && quantity > 1) {
       setQuantity(quantity - 1);
     }
-    if (operation === "+") {
+    if (type && type === "plus") {
       setQuantity(quantity + 1);
     }
   };
@@ -50,23 +53,35 @@ export default function ProductShowcase({ product }: any) {
             <p className="text-gray-800 my-12">Quantity</p>
             <div className="qty-input items-center mx-[20px] sm:mx-[50px]">
               <div className="ml-auto flex h-9 flex-row items-center ">
-                <EditQtyButton
+                {/* <EditQtyButton
                   operation={"minus"}
                   handleClick={handleQuantity}
-                />
+                /> */}
+                <button
+                  data-type="minus"
+                  className="ease flex h-full min-w-[36px] max-w-[36px]  flex-none items-center justify-center px-2 transition-all duration-200 hover:border-neutral-800 hover:opacity-80"
+                  onClick={(e) => handleQuantity(e)}
+                >
+                  {" "}
+                  -{" "}
+                </button>
                 <p className="w-6 text-center">
                   <span className="w-full text-sm">{quantity}</span>
                 </p>
-                <EditQtyButton
-                  operation={"plus"}
-                  handleClick={handleQuantity}
-                />
+                <button
+                  data-type="plus"
+                  className="ease flex h-full min-w-[36px] max-w-[36px]  flex-none items-center justify-center px-2 transition-all duration-200 hover:border-neutral-800 hover:opacity-80"
+                  onClick={(e) => handleQuantity(e)}
+                >
+                  {" "}
+                  +{" "}
+                </button>
               </div>
             </div>
           </div>
           {/**create a button component??? */}
           <div className="sm:flex sm:gap-x-4 text-sm sm:text-base">
-            <AddToCartButton id={product._id} />
+            <AddToCartButton id={product._id} quantity={quantity} />
             <button className="showcase-btn text-gray-800 w-full my-4 sm:m-0">
               ADD TO WISHLIST
             </button>

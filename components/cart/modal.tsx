@@ -113,7 +113,10 @@ export default function CartModal({ cart }: any) {
                                 <div className="ml-auto flex h-9 flex-row items-center  border">
                                   <EditQtyButton
                                     operation={"minus"}
-                                    handleClick={handleQuantity}
+                                    item={{
+                                      productId: product.item._id,
+                                      quantity: product.qty,
+                                    }}
                                   />
                                   <p className="w-6 text-center">
                                     <span className="w-full text-sm">
@@ -122,7 +125,10 @@ export default function CartModal({ cart }: any) {
                                   </p>
                                   <EditQtyButton
                                     operation={"plus"}
-                                    handleClick={handleQuantity}
+                                    item={{
+                                      productId: product.item._id,
+                                      quantity: product.qty,
+                                    }}
                                   />
                                 </div>
                               </div>
