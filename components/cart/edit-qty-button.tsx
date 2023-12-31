@@ -7,6 +7,9 @@ export default function EditQtyButton({
   operation: "plus" | "minus";
   handleClick: (operation: "-" | "+") => void;
 }) {
+  /**
+   * Evry click should update the database
+   */
   return (
     <button
       onClick={() => handleClick(operation === "plus" ? "+" : "-")}
