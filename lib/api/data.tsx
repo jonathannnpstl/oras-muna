@@ -1,6 +1,7 @@
 import clientPromise from "../connection";
 import { SortFilterItem } from "../constants";
 import { ObjectId } from "mongodb";
+import { ProductsCart } from "../definition";
 
 export async function fetchProducts({
   query,
@@ -87,3 +88,40 @@ export async function getBrands() {
     console.error(e);
   }
 }
+
+
+
+
+export async function getCart(id? : string) {
+  try {
+    const client = await clientPromise;
+    const db = client.db("oras-muna-db");
+    
+    const cart = await db.collection("carts").findOne({ _id: new ObjectId(id) })
+    const productList = JSON.parse(JSON.stringify(cart)).products
+    
+    let fetchProductsResult: ProductsCart[] = []
+    await Promise.all( productList.map(async (product : any) => {
+      fetchProductsResult.push({item : await fetchProduct(product.id), qty: product.quantity})
+    }))
+
+    /**
+     * products : {items , qnty}
+     * total: number
+     */
+    
+    
+    let total: number = 0
+    let totalQuantity: number= 0
+    fetchProductsResult.map((product) => {
+      total += product.item.price * product.qty
+      totalQuantity += product.qty
+    })
+    let result: {products :  ProductsCart[], total: number, totalQuantity: number} = {products: fetchProductsResult, total, totalQuantity}
+    return result
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+

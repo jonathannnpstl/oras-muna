@@ -9,3 +9,7 @@ export type Product = {
   // quantity: number;
   img: string;
 };
+export type ProductsCart = {
+  item : Product,
+  qty: number
+}

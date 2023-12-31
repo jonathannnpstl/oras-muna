@@ -1,4 +1,5 @@
 import Filter from "@/components/filter";
+import Sort from "@/components/filter/sort";
 
 import { Suspense } from "react";
 
