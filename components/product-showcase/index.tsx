@@ -66,7 +66,7 @@ export default function ProductShowcase({ product }: any) {
           </div>
           {/**create a button component??? */}
           <div className="sm:flex sm:gap-x-4 text-sm sm:text-base">
-            <AddToCartButton />
+            <AddToCartButton id={product._id} />
             <button className="showcase-btn text-gray-800 w-full my-4 sm:m-0">
               ADD TO WISHLIST
             </button>
