@@ -3,7 +3,7 @@ import ProductCard from "../product-card";
 import { fetchProducts } from "@/lib/api/data";
 import Sort from "../filter/sort";
 
-export default async function ProductsContent({ products }: any) {
+export default async function ProductsContent({ q }: any) {
   // const rows = [];
   // for (let i = 0; i < 4; i++) {
   //   // note: we are adding a key prop here to allow react to uniquely identify each
@@ -11,11 +11,18 @@ export default async function ProductsContent({ products }: any) {
   //   rows.push(<ProductCard key={i} />);
   // }
   // console.log(products);
+  const products = await fetchProducts({
+    query: q.query,
+    sortKey: q.sortKey,
+    reverse: q.reverse,
+    brand: q.brand,
+  });
+  console.log(products);
 
-  // const resultsText = products.length > 1 ? "results" : "result";
+  const resultsText = products.length > 1 ? "results" : "result";
   return (
     <>
-      {/* <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center">
         {q.query ? (
           <p className="mb-4 text-gray-600">
             {products.length === 0
@@ -27,13 +34,13 @@ export default async function ProductsContent({ products }: any) {
           <p>All products</p>
         )}
         <Sort />
-      </div> */}
-      {/* <div className="grid w-full grid-cols-auto gap-4">
+      </div>
+      <div className="grid w-full grid-cols-auto gap-4">
         {products &&
           products.map((product: any, index: number) => (
             <ProductCard product={product} key={index} />
           ))}
-      </div> */}
+      </div>
     </>
   );
 }
