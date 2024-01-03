@@ -7,21 +7,30 @@ export async function fetchProducts({
   query,
   sortKey,
   reverse,
+  brand,
 }: {
   query?: string;
   sortKey?: string | undefined;
   reverse?: boolean;
+  brand?: string | undefined;
 }): Promise<any | undefined> {
   try {
+    let products;
     const client = await clientPromise;
     const db = client.db("oras-muna-db");
     const regex = new RegExp("\\b" + query + "[a-zA-Z]*\\b", "i");
 
-    const products = db
-      .collection("products")
-      .find({ name: { $regex: regex } })
-      .limit(10);
-
+    if (brand) {
+      products = db
+        .collection("products")
+        .find({ $and: [{ brand: brand }, { name: { $regex: regex } }] })
+        .limit(10);
+    } else {
+      products = db
+        .collection("products")
+        .find({ name: { $regex: regex } })
+        .limit(10);
+    }
     if (sortKey === "price") {
       products.sort({ price: reverse ? -1 : 1 });
     } else if (sortKey === "popularity") {
