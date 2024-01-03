@@ -38,7 +38,7 @@ export default function CartModal({ cart }: any) {
   return (
     <>
       <button aria-label="Open cart" onClick={openCart}>
-        <OpenCart totalQuantity={cart.totalQuantity} />
+        <OpenCart totalQuantity={cart?.totalQuantity} />
       </button>
 
       <Transition show={isOpen}>
@@ -154,7 +154,7 @@ export default function CartModal({ cart }: any) {
                   </div>
                   <div className="mb-3 flex items-center justify-between border-b border-neutral-200 pb-1 pt-1 dark:border-neutral-700">
                     <p>Total</p>
-                    <p className="text-right text-base">${cart.total} USD</p>
+                    <p className="text-right text-base">${cart?.total} USD</p>
                     {/* <Price
                         className="text-right text-base text-black dark:text-white"
                         amount={cart.cost.totalAmount.amount}

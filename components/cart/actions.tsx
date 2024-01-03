@@ -3,28 +3,28 @@
 import { getCart } from "@/lib/api/data";
 import { addToCart } from "@/lib/api/actions";
 import { revalidatePath, revalidateTag } from "next/cache";
-import { updateCart, removeFromCart } from "@/lib/api/actions";
+import { updateCart, removeFromCart, createCart } from "@/lib/api/actions";
+import { cookies } from "next/headers";
 
 export async function addItem(
   previousState: any,
   product: { id: string; quantity: number }
 ) {
-  let cartId = true; //should be session cookie na
-  let cart;
+  let cartId: any = cookies().get("cartId")?.value; //should be session cookie na
+  let cart: any;
 
   if (cartId) {
-    //   cart = await getCart(cartId);
-    // cart = await getCart("658d6bf5b5bccf8e45639059");
+    cart = await getCart(cartId);
   }
 
   if (!cartId || !cart) {
-    //   cart = await createCart();
-    //   cartId = cart.id;
-    //   cookies().set("cartId", cartId);
+    cart = await createCart();
+    cartId = cart?.insertedId;
+    cookies().set("cartId", cartId);
   }
 
   try {
-    await addToCart("658d6bf5b5bccf8e45639059", product.id, product.quantity);
+    await addToCart(cartId, product.id, product.quantity);
     revalidateTag("cart");
   } catch (e) {
     return "Error adding item to cart";
@@ -38,23 +38,22 @@ export async function updateItemQuantity(
     quantity: number;
   }
 ) {
-  // const cartId = cookies().get("cartId")?.value;
+  const cartId = cookies().get("cartId")?.value;
 
-  // if (!cartId) {
-  //   return "Missing cart ID";
-  // }
-  console.log(product.quantity === 0);
+  if (!cartId) {
+    return "Missing cart ID";
+  }
 
   try {
     if (product.quantity === 0) {
-      await removeFromCart("658d6bf5b5bccf8e45639059", product.id);
+      await removeFromCart(cartId, product.id);
       console.log("Removed");
 
       revalidateTag("cart");
       return;
     }
 
-    await updateCart("658d6bf5b5bccf8e45639059", product.id, product.quantity);
+    await updateCart(cartId, product.id, product.quantity);
     revalidateTag("cart");
   } catch (e) {
     return "Error updating item quantity";

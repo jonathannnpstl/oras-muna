@@ -23,10 +23,13 @@ export default function AddToCartButton({
    * include date when the adding item happened
    */
   return (
-    <div className="showcase-btn bg-green-500 text-white w-full flex items-center justify-center">
-      <form className="text-center" action={actionWithId}>
-        <button type="submit">ADD TO CART</button>
-      </form>
-    </div>
+    <form
+      className="text-center showcase-btn bg-green-500 text-white w-full"
+      action={actionWithId}
+    >
+      <button type="submit" className="w-full h-full">
+        ADD TO CART
+      </button>
+    </form>
   );
 }

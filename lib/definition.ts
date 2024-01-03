@@ -10,6 +10,7 @@ export type Product = {
   img: string;
 };
 export type ProductsCart = {
-  item : Product,
-  qty: number
-}
+  item: Product;
+  qty: number;
+  date: number;
+};
