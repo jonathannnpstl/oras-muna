@@ -3,8 +3,6 @@ import { ProductShowcaseSkeleton } from "@/components/skeleton";
 import { fetchProduct } from "@/lib/api/data";
 import React, { Suspense } from "react";
 export default async function Page({ params }: { params: { handle: string } }) {
-  console.log(params.handle);
-
   const product = await fetchProduct(params.handle);
   return (
     <>

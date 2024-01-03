@@ -3,7 +3,7 @@ import clsx from "clsx";
 
 import React from "react";
 
-export default function OpenCart({totalQuantity}: {totalQuantity: number}) {
+export default function OpenCart({ totalQuantity }: { totalQuantity: number }) {
   return (
     <div className="relative flex h-10 w-10 items-center justify-center ">
       <ShoppingCartIcon

@@ -34,7 +34,7 @@ export default async function BrandPage({
         )}
         <Sort />
       </div>
-      {products.length > 0 ? <ProductsContent products={products} /> : null}
+      {/* {products.length > 0 ? <ProductsContent /> : null} */}
     </>
   );
 }

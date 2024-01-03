@@ -1,7 +1,17 @@
 import { Product } from "@/lib/definition";
 import ProductCard from "../product-card";
+import { fetchProducts } from "@/lib/api/data";
+import Sort from "../filter/sort";
 
-export default function ProductsContent({ products }: { products: Product[] }) {
+export default async function ProductsContent({
+  q,
+}: {
+  q: {
+    query: string;
+    sortKey: undefined | "popularity" | "rating" | "price";
+    reverse: boolean;
+  };
+}) {
   // const rows = [];
   // for (let i = 0; i < 4; i++) {
   //   // note: we are adding a key prop here to allow react to uniquely identify each
@@ -10,12 +20,34 @@ export default function ProductsContent({ products }: { products: Product[] }) {
   // }
   // console.log(products);
 
+  const products = await fetchProducts({
+    query: q.query,
+    sortKey: q.sortKey,
+    reverse: q.reverse,
+  });
+
+  const resultsText = products.length > 1 ? "results" : "result";
   return (
-    <div className="grid w-full grid-cols-auto gap-4">
-      {products &&
-        products.map((product, index) => (
-          <ProductCard product={product} key={index} />
-        ))}
-    </div>
+    <>
+      <div className="flex justify-between items-center">
+        {q.query ? (
+          <p className="mb-4 text-gray-600">
+            {products.length === 0
+              ? "There are no products that match"
+              : `Showing ${products.length} ${resultsText} for `}
+            <span className="font-bold">&quot;{q.query}&quot;</span>
+          </p>
+        ) : (
+          <p>All products</p>
+        )}
+        <Sort />
+      </div>
+      <div className="grid w-full grid-cols-auto gap-4">
+        {products &&
+          products.map((product: any, index: number) => (
+            <ProductCard product={product} key={index} />
+          ))}
+      </div>
+    </>
   );
 }

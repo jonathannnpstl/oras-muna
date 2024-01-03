@@ -26,7 +26,7 @@ export default function Navbar() {
         <Search />
       </div>
       <div className="hidden justify-end md:flex md:w-1/3">
-        <Suspense fallback={<OpenCart />}>
+        <Suspense fallback={<OpenCart totalQuantity={0} />}>
           <Cart />
         </Suspense>
       </div>
