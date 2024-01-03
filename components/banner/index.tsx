@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 
-export default function Banner() {
+export default async function Banner() {
   return (
     <div className="w-full grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-2 aspect-square justify-center items-center">
       <div className="md:row-span-3 md:col-span-3 w-full h-full aspect-square object-contain relative">

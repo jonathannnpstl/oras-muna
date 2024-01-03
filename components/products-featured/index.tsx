@@ -8,7 +8,12 @@ import { CardsSkeleton } from "../skeleton";
 const antic_didone = Antic_Didone({ subsets: ["latin"], weight: "400" });
 
 export default async function ProductsFeatured() {
-  const products = await fetchProducts({ query: "" });
+  const q = {
+    query: "",
+    sortKey: undefined,
+    reverse: false,
+    brand: undefined,
+  };
   return (
     <>
       <div className="text-8xl antialiased tracking-wide my-40">
@@ -19,9 +24,7 @@ export default async function ProductsFeatured() {
       </div>
       <p className="text-lg">Featured</p>
       <Suspense fallback={<CardsSkeleton />}>
-        <ProductsContent
-          q={{ query: "", sortKey: undefined, reverse: false }}
-        />
+        {<ProductsContent q={{ query: "" }} />}
       </Suspense>
     </>
   );

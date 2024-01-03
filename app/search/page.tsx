@@ -3,7 +3,7 @@ import React, { Suspense } from "react";
 import { fetchProducts } from "@/lib/api/data";
 import { sorting, defaultSort } from "@/lib/constants";
 import Sort from "@/components/filter/sort";
-import { CardsSkeleton } from "@/components/skeleton";
+import { CardsSkeleton, ProductShowcaseSkeleton } from "@/components/skeleton";
 
 export default async function SearchPage({
   searchParams,
@@ -16,17 +16,17 @@ export default async function SearchPage({
 
   const { sortKey, reverse } =
     sorting.find((item) => item.slug === sort) || defaultSort;
-
-  const data = {
+  const q = {
     query: searchValue ? searchValue : "",
     sortKey,
     reverse,
+    brand: undefined,
   };
 
   return (
     <>
-      <Suspense fallback={<CardsSkeleton />}>
-        <ProductsContent q={data} />
+      <Suspense key={searchValue} fallback={<CardsSkeleton />}>
+        <ProductsContent q={q} />
       </Suspense>
     </>
   );
