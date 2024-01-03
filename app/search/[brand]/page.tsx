@@ -1,8 +1,9 @@
 import ProductsContent from "@/components/products-content";
-import React from "react";
+import React, { Suspense } from "react";
 import { transformStringUpper } from "@/lib/utils";
-import { fetchBrandProducts } from "@/lib/api/data";
 import Sort from "@/components/filter/sort";
+import { defaultSort, sorting } from "@/lib/constants";
+import { ProductShowcaseSkeleton } from "@/components/skeleton";
 
 export default async function BrandPage({
   params,
@@ -14,27 +15,22 @@ export default async function BrandPage({
   const { sort, query: searchValue } = searchParams as {
     [key: string]: string;
   };
-  const products = await fetchBrandProducts({
-    brand: transformStringUpper(params.brand),
+
+  const { sortKey, reverse } =
+    sorting.find((item) => item.slug === sort) || defaultSort;
+  const q = {
     query: searchValue ? searchValue : "",
-  });
-  const resultsText = products.length > 1 ? "results" : "result";
+    sortKey,
+    reverse,
+    brand: transformStringUpper(params.brand),
+  };
+  console.log(q);
+
   return (
     <>
-      <div className="flex justify-between items-center">
-        {searchValue ? (
-          <p className="mb-4 text-gray-600">
-            {products.length === 0
-              ? "There are no products that match"
-              : `Showing ${products.length} ${resultsText} for `}
-            <span className="font-bold">&quot;{searchValue}&quot;</span>
-          </p>
-        ) : (
-          <p>All products</p>
-        )}
-        <Sort />
-      </div>
-      {/* {products.length > 0 ? <ProductsContent /> : null} */}
+      <Suspense fallback={<ProductShowcaseSkeleton />}>
+        <ProductsContent q={q} />
+      </Suspense>
     </>
   );
 }
