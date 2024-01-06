@@ -16,8 +16,6 @@ export function SortItem({
 
   const active = searchParams.get("sort") === item.slug;
 
-  const newParams = new URLSearchParams(searchParams.toString());
-  // newParams.delete("query");
   const query = searchParams.get("query");
   const href = createUrl(
     pathname,
@@ -32,7 +30,7 @@ export function SortItem({
     <>
       <li
         className={clsx(
-          "w-full p-2 px-3 text-sm text-gray-600 hover:bg-gray-200 dark:hover:text-gray-900",
+          "w-full p-2 px-3 text-sm text-gray-800 hover:bg-gray-200 hover:text-gray-900",
           {
             "bg-gray-200": active,
           }
@@ -48,36 +46,18 @@ export default function Sort() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   return (
-    <div className="sort">
+    <div className="sort w-[150px] float-right hover:underline">
       <label htmlFor="touch">
         <span>Sort By:</span>
       </label>
       <input type="checkbox" id="touch" />
 
-      <ul className="slide bg-white">
-        {/* <li>
-          <a href={createUrl(pathname, new URLSearchParams(""))}>Relevance</a>
-        </li> */}
+      <ul className="slide bg-white shadow">
         <SortItem item={{ name: "Relevance", slug: null }} />
         <SortItem item={{ name: "Price: Low to High", slug: "price-asc" }} />
         <SortItem item={{ name: "Price: High to Low", slug: "price-desc" }} />
         <SortItem item={{ name: "Rating", slug: "rating" }} />
         <SortItem item={{ name: "Popularity", slug: "popularity" }} />
-        {/* <li>
-          <a href={createUrl(pathname, new URLSearchParams("sort=price-desc"))}>
-            <p>Price: High to Low</p>
-          </a>
-        </li>
-        <li>
-          <a href={createUrl(pathname, new URLSearchParams("sort=rating"))}>
-            Rating
-          </a>
-        </li>
-        <li>
-          <a href={createUrl(pathname, new URLSearchParams("sort=popularity"))}>
-            Popularity
-          </a>
-        </li> */}
       </ul>
     </div>
   );

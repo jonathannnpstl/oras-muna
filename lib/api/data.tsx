@@ -31,7 +31,6 @@ export async function fetchProducts({
         .find({ name: { $regex: regex } })
         .limit(10);
     }
-    console.log(products);
 
     if (sortKey === "price") {
       products.sort({ price: reverse ? -1 : 1 });

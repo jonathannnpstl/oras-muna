@@ -22,10 +22,10 @@ export default function Filter() {
   // };
 
   return (
-    <div className="p-3 sticky top-[72px] overflow-hidden">
-      <div className="w-[250px]  h-full text-gray-600  text-base  flex flex-col gap-3">
+    <div className="sticky top-[72px] overflow-hidden">
+      <div className="w-[250px] h-full text-gray-500 p-2  text-sm  flex flex-col gap-3">
         <div className="my-2">
-          <p className="font-bold ">Brand</p>
+          <p className="">Brands</p>
           <BrandsList />
         </div>
         Color

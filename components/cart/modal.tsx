@@ -141,7 +141,9 @@ export default function CartModal({ cart }: any) {
                 <div className="py-4 text-sm text-grey-800">
                   <div className="mb-3 flex items-center justify-between border-b border-neutral-200 pb-1 dark:border-neutral-700">
                     <p>Taxes</p>
-                    <p className="text-right text-base">$14.00 USD</p>
+                    <p className="text-right text-base">
+                      ${cart?.total ? 14 : 0}.00 USD
+                    </p>
                     {/* <Price
                         className="text-right text-base text-black dark:text-white"
                         amount={cart.cost.totalTaxAmount.amount}
@@ -154,7 +156,9 @@ export default function CartModal({ cart }: any) {
                   </div>
                   <div className="mb-3 flex items-center justify-between border-b border-neutral-200 pb-1 pt-1 dark:border-neutral-700">
                     <p>Total</p>
-                    <p className="text-right text-base">${cart?.total} USD</p>
+                    <p className="text-right text-base">
+                      ${cart?.total ? cart?.total + 14 : 0}.00 USD
+                    </p>
                     {/* <Price
                         className="text-right text-base text-black dark:text-white"
                         amount={cart.cost.totalAmount.amount}

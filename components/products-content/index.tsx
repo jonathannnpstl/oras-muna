@@ -4,20 +4,12 @@ import { fetchProducts } from "@/lib/api/data";
 import Sort from "../filter/sort";
 
 export default async function ProductsContent({ q }: any) {
-  // const rows = [];
-  // for (let i = 0; i < 4; i++) {
-  //   // note: we are adding a key prop here to allow react to uniquely identify each
-  //   // element in this array. see: https://reactjs.org/docs/lists-and-keys.html
-  //   rows.push(<ProductCard key={i} />);
-  // }
-  // console.log(products);
   const products = await fetchProducts({
     query: q.query,
     sortKey: q.sortKey,
     reverse: q.reverse,
     brand: q.brand,
   });
-  console.log(products);
 
   const resultsText = products.length > 1 ? "results" : "result";
   return (
@@ -33,7 +25,6 @@ export default async function ProductsContent({ q }: any) {
         ) : (
           <p>All products</p>
         )}
-        <Sort />
       </div>
       <div className="grid w-full grid-cols-auto gap-4">
         {products &&
