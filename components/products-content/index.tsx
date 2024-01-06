@@ -1,14 +1,14 @@
-import { Product } from "@/lib/definition";
 import ProductCard from "../product-card";
 import { fetchProducts } from "@/lib/api/data";
-import Sort from "../filter/sort";
+import PageItem from "./pagination";
 
 export default async function ProductsContent({ q }: any) {
-  const products = await fetchProducts({
+  const { products, numberOfPages } = await fetchProducts({
     query: q.query,
     sortKey: q.sortKey,
     reverse: q.reverse,
     brand: q.brand,
+    skip: parseInt(q.page),
   });
 
   const resultsText = products.length > 1 ? "results" : "result";
@@ -31,6 +31,13 @@ export default async function ProductsContent({ q }: any) {
           products.map((product: any, index: number) => (
             <ProductCard product={product} key={index} />
           ))}
+      </div>
+      <div className="flex justify-center gap-2 relative m-12">
+        {Array(numberOfPages)
+          .fill(0)
+          .map((_, i) => {
+            return <PageItem key={i} number={i + 1} len={numberOfPages} />;
+          })}
       </div>
     </>
   );

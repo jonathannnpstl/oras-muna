@@ -10,7 +10,7 @@ import "simple-line-icons";
 import clsx from "clsx";
 
 export default function ProductShowcase({ product }: any) {
-  const imageArray: string[] = [product.img, "audemars-piguet/image-1.avif"];
+  const imageArray: string[] = product.images;
   const details = [
     {
       id: 1,
@@ -35,14 +35,13 @@ export default function ProductShowcase({ product }: any) {
   ];
   const [quantity, setQuantity] = useState<number>(1);
   const [openDetailId, setOpenDetailId] = useState<number | string>("");
-  const [img, setImage] = useState<string>(product.img);
+  const [img, setImage] = useState<string>(product.images[0]);
   const [pastIndex, setPastIndex] = useState<number>(0);
   const active = true;
   const handleDetailOpen = (e: React.MouseEvent, id: number) => {
     e.preventDefault();
     setOpenDetailId(id !== openDetailId ? id : "");
   };
-  const brandPath = product.img.substring(0, product.img.indexOf("/"));
   const handleQuantity = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const type = e.currentTarget.getAttribute("data-type");
@@ -81,7 +80,7 @@ export default function ProductShowcase({ product }: any) {
               onClick={(e) => handleImage(e)}
             ></i>
             <Image
-              src={`/img/${img}`}
+              src={img}
               width={500}
               height={600}
               className="h-48 w-full object-contain sm:h-[350px] sm:max-w-xs m-auto aspect-auto"
@@ -100,16 +99,16 @@ export default function ProductShowcase({ product }: any) {
                   <div
                     key={index}
                     className={clsx(
-                      "w-[75px] h-[75px] border-[1px] border-gray-200 border-solid cursor-pointer",
+                      "w-[75px] h-[75px] border-[1px] border-solid cursor-pointer",
                       {
-                        "border-black": img === image,
+                        "border-black": index == pastIndex,
                       }
                     )}
                     onClick={(e) => handleImage(e)}
                     data-image-index={index}
                   >
                     <Image
-                      src={`/img/${image}`}
+                      src={image}
                       width={100}
                       height={100}
                       alt="Some image"
@@ -122,13 +121,15 @@ export default function ProductShowcase({ product }: any) {
         </div>
 
         <div className="grow shrink basis-0 p-6 self-start">
+          <p className="text-lg font-light text-gray-500 tracking-widest">
+            {product.brand}
+          </p>
           <p className="text-3xl font-semibold tracking-tight">
             {product.name}
           </p>
-          <p className="text-xl font-semibold text-gray-800 ">
+          <p className="text-xl font-semibold text-gray-800 tracking-wide ">
             ${product.price}
           </p>
-          <p className="text-base text-gray-800 ">{product.description}</p>
           <div className="flex overflow-hidden items-center text-base">
             {/**
              * need to create new compnent for quantity

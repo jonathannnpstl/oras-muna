@@ -94,7 +94,7 @@ export default function CartModal({ cart }: any) {
                                   width={64}
                                   height={64}
                                   alt="asdasds"
-                                  src={`/img/${product.item.img}`}
+                                  src={product.item.images[0]}
                                 />
                               </div>
 

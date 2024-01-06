@@ -1,13 +1,16 @@
 export type Product = {
   _id: object;
-  product_id: number;
   name: string;
   brand: string;
   price: number;
-  description: string;
-  tags: [string];
+  images: string[];
+  popularity: number;
+  rating: number;
+  band_color: string;
+  case_material: string;
+  dial_color: string;
+
   // quantity: number;
-  img: string;
 };
 export type ProductsCart = {
   item: Product;
