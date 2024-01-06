@@ -164,4 +164,60 @@ body {
   #touch:checked + span::after {
     transform: rotate(45deg);
   }
+
+  /**
+  LOADINGGGG
+  */
+
+  @keyframes rotate-loading {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes loading-text-opacity {
+    0% {
+      opacity: 0;
+    }
+    20% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  .loading-container,
+  .loading {
+    position: relative;
+    border-radius: 100%;
+  }
+
+  .loading-container {
+    margin: 0px auto;
+  }
+
+  .loading {
+    border: 2px solid transparent;
+    animation: rotate-loading 1.5s linear 0s infinite normal;
+    transform-origin: 50% 50%;
+  }
+
+  /* .showcase .loading {
+    border-color: transparent #fff transparent #fff;
+  } */
+
+  .cart .loading {
+    border-color: transparent #1f2937 transparent #1f2937;
+  }
+
+  .loading-container:hover .loading,
+  .loading-container .loading {
+    transition: all 0.5s ease-in-out;
+  }
 }

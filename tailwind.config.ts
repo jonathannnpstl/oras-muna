@@ -9,7 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       gridTemplateColumns: {
-        auto: "repeat(auto-fill, minmax(200px, max-content))",
+        auto: "repeat(auto-fill, minmax(200px, 1fr))",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

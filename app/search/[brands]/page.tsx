@@ -3,13 +3,13 @@ import React, { Suspense } from "react";
 import { transformStringUpper } from "@/lib/utils";
 import Sort from "@/components/filter/sort";
 import { defaultSort, sorting } from "@/lib/constants";
-import { ProductShowcaseSkeleton } from "@/components/skeleton";
+import { CardsSkeleton } from "@/components/skeleton";
 
 export default async function BrandPage({
   params,
   searchParams,
 }: {
-  params: { brand: string };
+  params: { brands: string };
   searchParams?: { [key: string]: string | string[] | undefined };
 }) {
   const { sort, query: searchValue } = searchParams as {
@@ -22,13 +22,13 @@ export default async function BrandPage({
     query: searchValue ? searchValue : "",
     sortKey,
     reverse,
-    brand: transformStringUpper(params.brand),
+    brand: transformStringUpper(params.brands),
   };
-  console.log(q);
 
   return (
     <>
-      <Suspense fallback={<ProductShowcaseSkeleton />}>
+      <Sort />
+      <Suspense fallback={<CardsSkeleton />}>
         <ProductsContent q={q} />
       </Suspense>
     </>

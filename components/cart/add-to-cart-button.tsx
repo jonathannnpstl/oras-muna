@@ -1,6 +1,49 @@
 import React from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import { addItem } from "./actions";
+import clsx from "clsx";
+
+function Submit(prop: { type: string }) {
+  const { pending } = useFormStatus();
+
+  const type = prop.type === "cart" ? "ADD TO CART" : "ADD TO WISHLIST";
+
+  return (
+    <button
+      disabled={pending}
+      type="submit"
+      className={clsx("w-full h-full showcase-btn ", {
+        "cursor-not-allowed": pending,
+      })}
+    >
+      {pending ? (
+        <div className="loading-container w-[23px] h-[23px]">
+          <div
+            className={clsx("loading w-[23px] h-[23px]", {
+              "border-y-[#fff]": prop.type === "cart",
+              "border-y-[#1f2937]": prop.type === "wishlist",
+            })}
+          ></div>
+        </div>
+      ) : (
+        <span>{type}</span>
+      )}
+    </button>
+  );
+}
+
+export function AddToWishlistButton({ id }: { id: string }) {
+  // const [message, formAction] = useFormState(addItem, null);
+  // const actionWithId = formAction.bind(null, { id: id });
+  return (
+    <form
+      className="text-center text-gray-800 w-full sm:m-0 flex-1"
+      // action={actionWithId}
+    >
+      <Submit type={"wishlist"} />
+    </form>
+  );
+}
 
 export default function AddToCartButton({
   id,
@@ -24,12 +67,10 @@ export default function AddToCartButton({
    */
   return (
     <form
-      className="text-center showcase-btn bg-green-500 text-white w-full"
+      className="text-center flex-1 bg-green-500 text-white w-full"
       action={actionWithId}
     >
-      <button type="submit" className="w-full h-full">
-        ADD TO CART
-      </button>
+      <Submit type={"cart"} />
     </form>
   );
 }

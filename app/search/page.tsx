@@ -25,6 +25,7 @@ export default async function SearchPage({
 
   return (
     <>
+      <Sort />
       <Suspense key={searchValue} fallback={<CardsSkeleton />}>
         <ProductsContent q={q} />
       </Suspense>

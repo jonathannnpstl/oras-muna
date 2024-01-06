@@ -24,7 +24,7 @@ export default async function ProductsFeatured() {
       </div>
       <p className="text-lg">Featured</p>
       <Suspense fallback={<CardsSkeleton />}>
-        {<ProductsContent q={{ query: "" }} />}
+        {<ProductsContent q={q} />}
       </Suspense>
     </>
   );

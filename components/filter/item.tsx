@@ -14,14 +14,18 @@ export function FilterItem({ item }: { item: { name: string; path: string } }) {
   const DynamicTag = active ? "p" : Link;
   return (
     <>
-      <li className="mt-2 flex text-black dark:text-white" key={item.name}>
+      <li
+        className={clsx(
+          "flex text-black dark:text-white hover:text-gray-900",
+          {}
+        )}
+        key={item.name}
+      >
         <DynamicTag
           href={createUrl(item.path, newParams)}
           className={clsx(
-            "w-full underline-offset-4 text-base p-2 px-3 text-gray-600 hover:bg-gray-200 dark:hover:text-gray-900",
-            {
-              "bg-gray-200": active,
-            }
+            "w-full underline-offset-4 text-base m-2 text-gray-800 hover:underline ",
+            { "underline felx": active }
           )}
         >
           {item.name}
