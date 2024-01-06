@@ -7,10 +7,12 @@ import Dropdowns from "./dropdowns";
 
 async function BrandsList() {
   //tried to remove the dynamicity?? of the element
-  const collections = await getBrands();
-  return <FilterItemList />;
+  const brands = await getBrands();
+
+  return <FilterItemList brands={brands} />;
 }
 
+async function checkBoxes() {}
 export default function Filter() {
   const color = grey[900];
   function valuetext(value: number) {
@@ -23,12 +25,35 @@ export default function Filter() {
 
   return (
     <div className="sticky top-[72px] overflow-hidden">
-      <div className="w-[250px] h-full text-gray-500 p-2  text-sm  flex flex-col gap-3">
+      <div
+        className="w-[250px] text-gray-500 p-2 h-screen overflow-y-scroll text-sm flex flex-col gap-3"
+        id="filter-scrollbar"
+      >
         <div className="my-2">
           <p className="">Brands</p>
           <BrandsList />
         </div>
-        Color
+        <div className="my-2">
+          <p className="">Band Color</p>
+          <label>
+            <input
+              type="checkbox"
+              // value={label}
+              // checked={isChecked}
+              // onChange={this.toggleCheckboxChange}
+            />
+            Option 1
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              // value={label}
+              // checked={isChecked}
+              // onChange={this.toggleCheckboxChange}
+            />
+            Option 2
+          </label>
+        </div>
       </div>
     </div>
   );

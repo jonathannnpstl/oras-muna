@@ -1,8 +1,6 @@
 import React, { Suspense, useEffect } from "react";
 import ProductsContent from "../products-content";
 import { Antic_Didone } from "next/font/google";
-import { Product } from "@/lib/definition";
-import { fetchProducts } from "@/lib/api/data";
 import { CardsSkeleton } from "../skeleton";
 
 const antic_didone = Antic_Didone({ subsets: ["latin"], weight: "400" });

@@ -1,7 +1,6 @@
 import React from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import { updateItemQuantity } from "./actions";
-import { Product } from "@/lib/definition";
 import clsx from "clsx";
 
 function Submit(prop: { type: "plus" | "minus" }) {

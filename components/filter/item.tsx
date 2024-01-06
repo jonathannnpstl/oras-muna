@@ -1,5 +1,5 @@
 "use client";
-import { createUrl } from "@/lib/utils";
+import { createUrl, transformStringLower } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import clsx from "clsx";
@@ -35,20 +35,21 @@ export function FilterItem({ item }: { item: { name: string; path: string } }) {
   );
 }
 
-export function FilterItemList() {
+export function FilterItemList({ brands }: { brands: string[] }) {
   return (
     <>
       <FilterItem item={{ name: "All", path: "/search" }} />
-      <FilterItem
-        item={{ name: "Audemars Piguet", path: "/search/audemars-piguet" }}
-      />
-      <FilterItem
-        item={{ name: "Patek Philippe", path: "/search/patek-philippe" }}
-      />
-      <FilterItem
-        item={{ name: "Richard Mille", path: "/search/richard-mille" }}
-      />
-      <FilterItem item={{ name: "Rolex", path: "/search/rolex" }} />
+      {brands.map((brand, index) => {
+        return (
+          <FilterItem
+            key={index}
+            item={{
+              name: brand,
+              path: `/search/${transformStringLower(brand)}`,
+            }}
+          />
+        );
+      })}
     </>
   );
 }

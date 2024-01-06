@@ -5,6 +5,7 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { createUrl } from "@/lib/utils";
 import Link from "next/link";
 import clsx from "clsx";
+import { sorting } from "@/lib/constants";
 
 export function SortItem({
   item,
@@ -53,11 +54,11 @@ export default function Sort() {
       <input type="checkbox" id="touch" />
 
       <ul className="slide bg-white shadow">
-        <SortItem item={{ name: "Relevance", slug: null }} />
-        <SortItem item={{ name: "Price: Low to High", slug: "price-asc" }} />
-        <SortItem item={{ name: "Price: High to Low", slug: "price-desc" }} />
-        <SortItem item={{ name: "Rating", slug: "rating" }} />
-        <SortItem item={{ name: "Popularity", slug: "popularity" }} />
+        {sorting.map((sort, i) => {
+          return (
+            <SortItem key={i} item={{ name: sort.title, slug: sort.slug }} />
+          );
+        })}
       </ul>
     </div>
   );

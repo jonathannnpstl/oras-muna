@@ -1,5 +1,4 @@
 import clientPromise from "../connection";
-import { SortFilterItem } from "../constants";
 import { ObjectId } from "mongodb";
 import { ProductsCart } from "../definition";
 
@@ -8,40 +7,64 @@ export async function fetchProducts({
   sortKey,
   reverse,
   brand,
+  skip,
 }: {
   query?: string;
   sortKey?: string | undefined;
   reverse?: boolean;
   brand?: string | undefined;
+  skip?: number | undefined;
 }): Promise<any | undefined> {
   try {
+    let skips = skip ? (skip - 1) * 3 : 0;
     let products;
     const client = await clientPromise;
     const db = client.db("oras-muna-db");
     const regex = new RegExp("\\b" + query + "[a-zA-Z]*\\b", "i");
+    let count: number = 0;
+    let numberOfPages: number = 1;
 
     if (brand) {
       products = db
         .collection("products")
-        .find({ $and: [{ brand: brand }, { name: { $regex: regex } }] })
-        .limit(10);
+        .find({ $and: [{ brand: brand }, { name: { $regex: regex } }] });
+      count = await db.collection("products").countDocuments({
+        $and: [{ brand: brand }, { name: { $regex: regex } }],
+      });
     } else {
-      products = db
+      products = db.collection("products").find({ name: { $regex: regex } });
+      count = await db
         .collection("products")
-        .find({ name: { $regex: regex } })
-        .limit(10);
+        .countDocuments({ name: { $regex: regex } });
     }
 
     if (sortKey === "price") {
-      products.sort({ price: reverse ? -1 : 1 });
+      products
+        .sort({ price: reverse ? -1 : 1 })
+        .skip(skips)
+        .limit(3);
     } else if (sortKey === "popularity") {
-      products.sort({ popularity: reverse ? -1 : 1 });
+      products
+        .sort({ popularity: reverse ? -1 : 1 })
+        .skip(skips)
+        .limit(3);
     } else if (sortKey === "rating") {
-      products.sort({ rating: reverse ? -1 : 1 });
+      products
+        .sort({ rating: reverse ? -1 : 1 })
+        .skip(skips)
+        .limit(3);
     } else {
-      products.sort({ name: reverse ? -1 : 1 });
+      products
+        .sort({ name: reverse ? -1 : 1 })
+        .skip(skips)
+        .limit(3);
     }
-    return JSON.parse(JSON.stringify(await products.toArray()));
+    const data = {
+      products: await products.toArray(),
+      numberOfPages: Math.ceil(count / 3),
+    };
+
+    return JSON.parse(JSON.stringify(data));
   } catch (e) {
     console.error(e);
   }
@@ -61,30 +84,6 @@ export async function fetchProduct(id?: string): Promise<any | undefined> {
     console.error(e);
   }
 }
-
-// export async function fetchBrandProducts({
-//   brand,
-//   query,
-// }: {
-//   brand?: string;
-//   query?: string;
-// }): Promise<any | undefined> {
-//   try {
-//     const client = await clientPromise;
-//     const db = client.db("oras-muna-db");
-//     const regex = new RegExp("\\b" + query + "[a-zA-Z]*\\b", "i");
-
-//     const products = await db
-//       .collection("products")
-//       .find({ $and: [{ brand: brand }, { name: { $regex: regex } }] })
-//       .limit(10)
-//       .toArray();
-
-//     return JSON.parse(JSON.stringify(products));
-//   } catch (e) {
-//     console.error(e);
-//   }
-// }
 
 export async function getBrands() {
   try {

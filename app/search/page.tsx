@@ -1,6 +1,5 @@
 import ProductsContent from "@/components/products-content";
 import React, { Suspense } from "react";
-import { fetchProducts } from "@/lib/api/data";
 import { sorting, defaultSort } from "@/lib/constants";
 import Sort from "@/components/filter/sort";
 import { CardsSkeleton, ProductShowcaseSkeleton } from "@/components/skeleton";
@@ -10,7 +9,11 @@ export default async function SearchPage({
 }: {
   searchParams?: { [key: string]: string | string[] | undefined };
 }) {
-  const { sort, query: searchValue } = searchParams as {
+  const {
+    sort,
+    query: searchValue,
+    page,
+  } = searchParams as {
     [key: string]: string;
   };
 
@@ -21,6 +24,7 @@ export default async function SearchPage({
     sortKey,
     reverse,
     brand: undefined,
+    page,
   };
 
   return (
