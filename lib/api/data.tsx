@@ -16,13 +16,12 @@ export async function fetchProducts({
   skip?: number | undefined;
 }): Promise<any | undefined> {
   try {
-    let skips = skip ? (skip - 1) * 3 : 0;
+    let skips = skip ? (skip - 1) * 9 : 0;
     let products;
     const client = await clientPromise;
     const db = client.db("oras-muna-db");
     const regex = new RegExp("\\b" + query + "[a-zA-Z]*\\b", "i");
     let count: number = 0;
-    let numberOfPages: number = 1;
 
     if (brand) {
       products = db
@@ -42,26 +41,26 @@ export async function fetchProducts({
       products
         .sort({ price: reverse ? -1 : 1 })
         .skip(skips)
-        .limit(3);
+        .limit(9);
     } else if (sortKey === "popularity") {
       products
         .sort({ popularity: reverse ? -1 : 1 })
         .skip(skips)
-        .limit(3);
+        .limit(9);
     } else if (sortKey === "rating") {
       products
         .sort({ rating: reverse ? -1 : 1 })
         .skip(skips)
-        .limit(3);
+        .limit(9);
     } else {
       products
         .sort({ name: reverse ? -1 : 1 })
         .skip(skips)
-        .limit(3);
+        .limit(9);
     }
     const data = {
       products: await products.toArray(),
-      numberOfPages: Math.ceil(count / 3),
+      numberOfPages: Math.ceil(count / 9),
     };
 
     return JSON.parse(JSON.stringify(data));
