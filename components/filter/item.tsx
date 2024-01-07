@@ -9,7 +9,7 @@ export function FilterItem({ item }: { item: { name: string; path: string } }) {
   const searchParams = useSearchParams();
   const active = pathname === item.path;
   const newParams = new URLSearchParams(searchParams.toString());
-  // newParams.delete("query");
+  newParams.delete("page");
 
   const DynamicTag = active ? "p" : Link;
   return (
