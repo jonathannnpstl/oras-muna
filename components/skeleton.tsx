@@ -2,11 +2,6 @@ import React from "react";
 
 export default function CardSkeleton() {
   return (
-    // <div className="animate-pulse w-full relative overflow-hidden  bg-gray-100 overflow-hidden shadow-md">
-    //   <div className="bg-gray-200 w-full h-[200px] aspect-auto"></div>
-    //   <div className="m-2 h-7 w-10/12 bg-gray-200"></div>
-    //   <div className="m-2 h-7 w-1/3 bg-gray-300"></div>
-    // </div>
     <div className="animate-pulse relative overflow-hidden bg-gray-50">
       <div className="w-full">
         <div className="w-full h-[340px]"></div>
@@ -17,13 +12,13 @@ export default function CardSkeleton() {
 
 export function CardsSkeleton() {
   return (
-    <div className="grid w-full grid-cols-auto gap-4">
+    <>
       {Array(9)
         .fill(0)
         .map((_, i) => {
           return <CardSkeleton key={i} />;
         })}
-    </div>
+    </>
   );
 }
 export function ProductShowcaseSkeleton() {

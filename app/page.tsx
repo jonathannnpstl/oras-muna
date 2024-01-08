@@ -8,7 +8,7 @@ export default async function Home() {
     <>
       <Suspense fallback={<CardsSkeleton />}>
         <Banner />
-        <ProductsFeatured />
+        {/* <ProductsFeatured /> */}
       </Suspense>
       {/* <CardsSkeleton /> */}
     </>

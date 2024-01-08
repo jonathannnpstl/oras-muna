@@ -31,6 +31,31 @@ export async function addItem(
   }
 }
 
+export async function removeItemFromCart(
+  prevState: any,
+  product: {
+    id: string;
+  }
+) {
+  console.log("Clicked");
+
+  const cartId = cookies().get("cartId")?.value;
+
+  if (!cartId) {
+    return "Missing cart ID";
+  }
+  try {
+    if (product.id) {
+      await removeFromCart(cartId, product.id);
+      console.log("Removed");
+      revalidateTag("cart");
+      return;
+    }
+  } catch (e) {
+    return "Error updating item quantity";
+  }
+}
+
 export async function updateItemQuantity(
   prevState: any,
   product: {
@@ -48,7 +73,6 @@ export async function updateItemQuantity(
     if (product.quantity === 0) {
       await removeFromCart(cartId, product.id);
       console.log("Removed");
-
       revalidateTag("cart");
       return;
     }
