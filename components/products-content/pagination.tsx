@@ -21,15 +21,14 @@ export default function PageItem({
   const greaterThanOne = len > 1;
 
   const query = searchParams.get("query");
-  let urlObj = {
-    query,
-  };
+  const sort = searchParams.get("sort");
 
   //idk, gonna solve this tommorrow. brain hurts aloooooooottttttttt!!!!
   const href = createUrl(
     pathname,
     new URLSearchParams({
       ...(query && { query }),
+      ...(sort && { sort }),
       ...(pageNumber && { page: pageNumber }),
     })
   );

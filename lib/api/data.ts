@@ -1,3 +1,4 @@
+"use server";
 import clientPromise from "../connection";
 import { ObjectId } from "mongodb";
 import { ProductsCart } from "../definition";
@@ -7,16 +8,16 @@ export async function fetchProducts({
   sortKey,
   reverse,
   brand,
-  skip,
+  page,
 }: {
   query?: string;
   sortKey?: string | undefined;
   reverse?: boolean;
   brand?: string | undefined;
-  skip?: number | undefined;
+  page?: number | undefined;
 }): Promise<any | undefined> {
   try {
-    let skips = skip ? (skip - 1) * 9 : 0;
+    let skips = page ? (page - 1) * 9 : 0;
     let products;
     const client = await clientPromise;
     const db = client.db("oras-muna-db");

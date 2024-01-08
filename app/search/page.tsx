@@ -2,7 +2,6 @@ import ProductsContent from "@/components/products-content";
 import React, { Suspense } from "react";
 import { sorting, defaultSort } from "@/lib/constants";
 import Sort from "@/components/filter/sort";
-import { CardsSkeleton, ProductShowcaseSkeleton } from "@/components/skeleton";
 
 export default async function SearchPage({
   searchParams,
@@ -30,7 +29,7 @@ export default async function SearchPage({
   return (
     <>
       <Sort />
-      <Suspense key={searchValue} fallback={<CardsSkeleton />}>
+      <Suspense key={searchValue}>
         <ProductsContent q={q} />
       </Suspense>
     </>
