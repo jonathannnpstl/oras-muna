@@ -2,6 +2,8 @@ import ProductsContent from "@/components/products-content";
 import React, { Suspense } from "react";
 import { sorting, defaultSort } from "@/lib/constants";
 import Sort from "@/components/filter/sort";
+import { transformStringUpper } from "@/lib/utils";
+import { getFilters } from "@/lib/api/data";
 
 export default async function SearchPage({
   searchParams,
@@ -12,6 +14,9 @@ export default async function SearchPage({
     sort,
     query: searchValue,
     page,
+    caseMaterial,
+    bandColor,
+    dialColor,
   } = searchParams as {
     [key: string]: string;
   };
@@ -24,6 +29,9 @@ export default async function SearchPage({
     reverse,
     brand: undefined,
     page,
+    caseMaterial,
+    bandColor,
+    dialColor,
   };
 
   return (

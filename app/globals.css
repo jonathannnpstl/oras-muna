@@ -31,7 +31,7 @@ body {
 }
 
 body::-webkit-scrollbar {
-  width: 8px;
+  width: 4px;
 }
 
 body::-webkit-scrollbar-track {
@@ -41,7 +41,7 @@ body::-webkit-scrollbar-track {
 
 body::-webkit-scrollbar-thumb {
   background-color: #000000;
-  border: 2px solid #616161;
+  border: 1px solid #616161;
 }
 
 @layer components {
@@ -239,7 +239,7 @@ body::-webkit-scrollbar-thumb {
     transition: all 0.5s ease-in-out;
   }
   #filter-scrollbar::-webkit-scrollbar {
-    width: 8px;
+    width: 4px;
   }
 
   #filter-scrollbar::-webkit-scrollbar-track {
@@ -249,6 +249,56 @@ body::-webkit-scrollbar-thumb {
 
   #filter-scrollbar::-webkit-scrollbar-thumb {
     background-color: #000000;
-    border: 2px solid #616161;
+    border: 1px solid #616161;
+  }
+
+  .checkbox-wrapper {
+    --size: 1rem;
+    --background: #000000;
+    font-size: var(--size);
+  }
+
+  .checkbox-wrapper *,
+  .checkbox-wrapper *::after {
+    box-sizing: border-box;
+  }
+
+  .checkbox-wrapper input[type="checkbox"] {
+    visibility: hidden;
+    display: none;
+  }
+
+  .checkbox-wrapper .checkbox__label {
+    width: var(--size);
+  }
+  .checkbox-wrapper .checkbox__label:after {
+    height: var(--size);
+    width: var(--size);
+    position: absolute;
+    top: calc(var(--size) * 0.2);
+    left: 0;
+    background: #fefefe;
+    content: " ";
+    display: block;
+    border: 1px solid black;
+    transition: 200ms;
+  }
+
+  .checkbox-wrapper .checkbox__label:after {
+    transition: 100ms ease-in-out;
+  }
+
+  .checkbox-wrapper .checkbox__input:checked ~ .checkbox__label:after {
+    background-color: black;
+  }
+
+  .checkbox-wrapper .checkbox {
+    position: relative;
+    display: flex;
+    gap: 4px;
+    cursor: pointer;
+    align-items: center;
+    /* Mobile Safari: */
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   }
 }

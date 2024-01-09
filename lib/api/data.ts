@@ -2,6 +2,8 @@
 import clientPromise from "../connection";
 import { ObjectId } from "mongodb";
 import { ProductsCart } from "../definition";
+import { transformStringUpper } from "../utils";
+import { filterFields } from "../constants";
 
 export async function fetchProducts({
   query,
@@ -9,12 +11,18 @@ export async function fetchProducts({
   reverse,
   brand,
   page,
+  caseMaterial,
+  bandColor,
+  dialColor,
 }: {
   query?: string;
   sortKey?: string | undefined;
   reverse?: boolean;
   brand?: string | undefined;
   page?: number | undefined;
+  caseMaterial?: string[] | undefined;
+  bandColor?: string[] | undefined;
+  dialColor?: string[] | undefined;
 }): Promise<any | undefined> {
   try {
     let skips = page ? (page - 1) * 9 : 0;
@@ -24,19 +32,42 @@ export async function fetchProducts({
     const regex = new RegExp("\\b" + query + "[a-zA-Z]*\\b", "i");
     let count: number = 0;
 
-    if (brand) {
-      products = db
-        .collection("products")
-        .find({ $and: [{ brand: brand }, { name: { $regex: regex } }] });
-      count = await db.collection("products").countDocuments({
-        $and: [{ brand: brand }, { name: { $regex: regex } }],
-      });
-    } else {
-      products = db.collection("products").find({ name: { $regex: regex } });
-      count = await db
-        .collection("products")
-        .countDocuments({ name: { $regex: regex } });
+    //this to make sure were passing an array to the query, as it requires
+    if (caseMaterial && caseMaterial?.constructor != Array) {
+      caseMaterial = Array(1).fill(caseMaterial);
     }
+    if (bandColor && bandColor?.constructor != Array) {
+      bandColor = Array(1).fill(bandColor);
+    }
+    if (dialColor && dialColor?.constructor != Array) {
+      dialColor = Array(1).fill(dialColor);
+    }
+
+    let queryObj: any = {};
+    if (query) {
+      queryObj.name = { $regex: regex };
+    }
+    if (brand) {
+      queryObj.brand = brand;
+    }
+    if (caseMaterial) {
+      queryObj.case_material = {
+        $in: caseMaterial.map((obj) => transformStringUpper(obj)),
+      };
+    }
+    if (bandColor) {
+      queryObj.band_color = {
+        $in: bandColor.map((obj) => transformStringUpper(obj)),
+      };
+    }
+    if (dialColor) {
+      queryObj.dial_color = {
+        $in: dialColor.map((obj) => transformStringUpper(obj)),
+      };
+    }
+
+    products = db.collection("products").find(queryObj);
+    count = await db.collection("products").countDocuments(queryObj);
 
     if (sortKey === "price") {
       products
@@ -61,6 +92,7 @@ export async function fetchProducts({
     }
     const data = {
       products: await products.toArray(),
+      count: count,
       numberOfPages: Math.ceil(count / 9),
     };
 
@@ -98,6 +130,44 @@ export async function getBrands() {
   }
 }
 
+export async function getFilters() {
+  try {
+    const client = await clientPromise;
+    const db = client.db("oras-muna-db");
+
+    const filterList = Promise.all(
+      filterFields.map(async (filter) => {
+        const data = await db
+          .collection("products")
+          .aggregate([
+            {
+              $group: {
+                _id: `$${filter}`,
+                count: {
+                  $sum: 1,
+                },
+              },
+            },
+            {
+              $sort: {
+                count: -1,
+              },
+            },
+          ])
+          .toArray();
+
+        return {
+          filterType: transformStringUpper(filter),
+          filterItems: JSON.parse(JSON.stringify(data)),
+        };
+      })
+    );
+    return filterList;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 export async function getCart(id?: string) {
   try {
     const client = await clientPromise;
@@ -130,7 +200,7 @@ export async function getCart(id?: string) {
       total += product.item.price * product.qty;
       totalQuantity += product.qty;
     });
-
+    //sort by date of addtocart
     fetchProductsResult.sort(function (a: any, b: any): any {
       return b.date - a.date;
     });
