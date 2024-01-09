@@ -1,21 +1,25 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Slider from "@mui/material/Slider";
 import { grey } from "@mui/material/colors";
-import { FilterItemList } from "./item";
+import { BrandItemList } from "./brand";
 import { getBrands } from "@/lib/api/data";
 import Dropdowns from "./dropdowns";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
 import { useDispatch } from "react-redux";
-import { filterProducts } from "@/lib/redux/features/productSlice";
 import BrandsList from "./brandlist";
+import CheckboxFilter from "./checkboxfilter";
+import { getFiltersList } from "@/lib/redux/features/filterSlice";
+import { getBrandsList } from "@/lib/redux/features/brandSlice";
 
 export default function Filter() {
   const dispatch = useAppDispatch();
-  const { products, numberOfPages, loading } = useAppSelector(
-    (state) => state.product
-  );
+  useEffect(() => {
+    dispatch(getFiltersList());
+  }, []);
+  const { filters, loading } = useAppSelector((state) => state.filter);
+
   const color = grey[900];
   function valuetext(value: number) {
     return `${value}$`;
@@ -24,14 +28,7 @@ export default function Filter() {
   // const handleChange = (event: Event, newValue: number | number[]) => {
   //   setValue(newValue as number[]);
   // };
-  const data = {
-    caseMaterial: ["rose gold"],
-    bandColor: ["brown"],
-    dialColor: ["brown"],
-  };
-  const handleClick = () => {
-    dispatch(filterProducts(data));
-  };
+
   return (
     <>
       <div className="sticky top-[72px] overflow-hidden">
@@ -43,27 +40,16 @@ export default function Filter() {
             <p className="">Brands</p>
             {/* <BrandsList /> */}
           </div>
-          <button onClick={(e) => handleClick()}>Filter work</button>
           <div className="my-2">
-            <p className="">Band Color</p>
-            <label>
-              <input
-                type="checkbox"
-                // value={label}
-                // checked={isChecked}
-                // onChange={this.toggleCheckboxChange}
-              />
-              Option 1
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                // value={label}
-                // checked={isChecked}
-                // onChange={this.toggleCheckboxChange}
-              />
-              Option 2
-            </label>
+            {filters && !loading
+              ? filters.map((filter, i) => (
+                  <CheckboxFilter
+                    key={i}
+                    filterCategory={filter.filterType}
+                    filterItems={filter.filterItems}
+                  />
+                ))
+              : null}
           </div>
         </div>
       </div>

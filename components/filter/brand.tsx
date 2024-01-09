@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import clsx from "clsx";
 
-export function FilterItem({ item }: { item: { name: string; path: string } }) {
+export function BrandItem({ item }: { item: { name: string; path: string } }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const active = pathname === item.path;
@@ -35,13 +35,13 @@ export function FilterItem({ item }: { item: { name: string; path: string } }) {
   );
 }
 
-export function FilterItemList({ brands }: { brands: string[] }) {
+export function BrandItemList({ brands }: { brands: string[] }) {
   return (
     <>
-      <FilterItem item={{ name: "All", path: "/search" }} />
+      <BrandItem item={{ name: "All", path: "/search" }} />
       {brands.map((brand, index) => {
         return (
-          <FilterItem
+          <BrandItem
             key={index}
             item={{
               name: brand,

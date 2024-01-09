@@ -40,8 +40,8 @@ export const sorting: SortFilterItem[] = [
   },
 ];
 
-export const TAGS = {
-  collections: "collections",
-  products: "products",
-  cart: "cart",
-};
+export const filterFields: string[] = [
+  "case_material",
+  "band_color",
+  "dial_color",
+];

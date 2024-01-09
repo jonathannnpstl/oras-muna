@@ -2,6 +2,7 @@
 import { useRef } from "react";
 import { Provider } from "react-redux";
 import { makeStore, AppStore } from "@/lib/redux/store";
+import { getFiltersList } from "@/lib/redux/features/filterSlice";
 
 export default function StoreProvider({
   children,

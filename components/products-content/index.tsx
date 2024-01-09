@@ -16,29 +16,25 @@ export default function ProductsContent({ q }: any) {
 
   console.log("rendered", q);
 
-  const { filteredProducts, numberOfPages, loading } = useAppSelector(
+  const { products, numberOfPages, loading, count } = useAppSelector(
     (state) => state.product
   );
+  console.log(count);
 
-  const resultsText =
-    filteredProducts && filteredProducts?.length > 1 ? "results" : "result";
+  const resultsText = products && products?.length > 1 ? "results" : "result";
   return (
     <>
       <div className="flex justify-between items-center">
-        {q.query ? (
-          <p className="mb-4 text-gray-600">
-            {filteredProducts?.length === 0
-              ? "There are no products that match"
-              : `Showing ${filteredProducts?.length} ${resultsText} for `}
-            <span className="font-bold">&quot;{q.query}&quot;</span>
-          </p>
-        ) : (
-          <p>All products</p>
-        )}
+        <p className="mb-4 text-gray-600">
+          {products?.length === 0 && count === 0 && !loading
+            ? "There are no products that match"
+            : `Showing ${products?.length} ${resultsText} of ${count}`}
+          {/* <span className="font-bold">&quot;{q.query}&quot;</span> */}
+        </p>
       </div>
       <div className="grid w-full grid-cols-auto gap-4">
-        {filteredProducts && !loading ? (
-          filteredProducts.map((product: any, index: number) => (
+        {products && !loading ? (
+          products.map((product: any, index: number) => (
             <ProductCard product={product} key={index} />
           ))
         ) : (

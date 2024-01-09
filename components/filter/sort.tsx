@@ -16,15 +16,14 @@ export function SortItem({
   const searchParams = useSearchParams();
 
   const active = searchParams.get("sort") === item.slug;
-
   const query = searchParams.get("query");
-  const href = createUrl(
-    pathname,
-    new URLSearchParams({
-      ...(query && { query }),
-      ...(item.slug && item.slug.length && { sort: item.slug }),
-    })
-  );
+  let newParams = new URLSearchParams(searchParams.toString());
+  if (item.slug) {
+    newParams.set("sort", item.slug);
+  } else {
+    newParams.delete("sort");
+  }
+  const href = createUrl(pathname, newParams);
 
   const DynamicTag = active ? "p" : Link;
   return (
@@ -44,8 +43,6 @@ export function SortItem({
 }
 
 export default function Sort() {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
   return (
     <div className="sort w-[150px] float-right hover:underline">
       <label htmlFor="touch">
