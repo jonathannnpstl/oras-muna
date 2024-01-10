@@ -7,16 +7,16 @@ export default async function Banner() {
     <div className="w-full grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-2 aspect-square justify-center items-center">
       <div className="md:row-span-3 md:col-span-3 w-full h-full aspect-square object-contain relative">
         <Link
-          href="/search/rolex"
+          href="/search?brand=kross-studio"
           className="relative before:absolute before:bg-gray-800/25 before:inset-0 before:transition before:duration-400 before:hover:bg-gray-800/50"
         >
           <span className="absolute tracking-widest text-slate-50 text-lg uppercase bottom-5 left-5">
-            <p>ROLEX</p>
+            <p>Kross Studio</p>
           </span>
           <Image
             height={0}
             width={300}
-            src="/img/rolex/cover.webp"
+            src="/img/kross-studio/cover.jpg"
             alt="Rolex watches"
             className=" w-full h-full"
           ></Image>
@@ -24,7 +24,7 @@ export default async function Banner() {
       </div>
       <div className="md:row-span-3 md:col-span-1 w-full h-full aspect-square object-cover">
         <Link
-          href="/search/audemars-piguet"
+          href="/search?brand=audemars-piguet"
           className="relative before:absolute before:bg-gray-800/25 before:inset-0 before:transition before:duration-400 before:hover:bg-gray-800/50"
         >
           <span className="absolute tracking-widest text-slate-50 text-lg uppercase bottom-5 left-5">
@@ -41,7 +41,7 @@ export default async function Banner() {
       </div>
       <div className="md:row-span-1 md:col-span-2 w-full h-full object-contain">
         <Link
-          href="/search/patek-philippe"
+          href="/search?brand=patek-philippe"
           className="relative before:absolute before:bg-gray-800/25 before:inset-0 before:transition before:duration-400 before:hover:bg-gray-800/50"
         >
           <span className="absolute tracking-widest text-slate-50 text-lg uppercase bottom-5 left-5">
@@ -58,16 +58,16 @@ export default async function Banner() {
       </div>
       <div className="md:row-span-1 md:col-span-1 w-full h-full aspect-square object-cover">
         <Link
-          href="/search/richard-mille"
+          href="/search?brand=de-bethune"
           className="relative before:absolute before:bg-gray-800/25 before:inset-0 before:transition before:duration-400 before:hover:bg-gray-800/50"
         >
           <span className="absolute tracking-widest text-slate-50 text-lg uppercase bottom-5 left-5">
-            <p>Richard Mille</p>
+            <p>De Bethune</p>
           </span>
           <Image
             height={0}
             width={300}
-            src="/img/richard-mille/cover.jpg"
+            src="/img/de-bethune/cover.jpg"
             alt="Rolex watches"
             className="w-full h-full"
           ></Image>

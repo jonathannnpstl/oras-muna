@@ -9,26 +9,30 @@ import { CardsSkeleton } from "../skeleton";
 export default function ProductsContent({ q }: any) {
   const store = useAppStore();
   const initialized = useRef(false);
+  if (!initialized.current){
+  
+  }
 
   useEffect(() => {
     store.dispatch(fetchProductsList(q));
   }, [q]);
-
+  
   console.log("rendered", q);
-
+  
   const { products, numberOfPages, loading, count } = useAppSelector(
     (state) => state.product
   );
-  console.log(count);
 
   const resultsText = products && products?.length > 1 ? "results" : "result";
   return (
     <>
       <div className="flex justify-between items-center">
         <p className="mb-4 text-gray-600">
-          {products?.length === 0 && count === 0 && !loading
-            ? "There are no products that match"
-            : `Showing ${products?.length} ${resultsText} of ${count}`}
+          {loading
+            ? "Searching for results..."
+            : products && products.length != 0 && count
+            ? `Showing ${products?.length} ${resultsText} of ${count}`
+            : "There are no products that match"}
           {/* <span className="font-bold">&quot;{q.query}&quot;</span> */}
         </p>
       </div>
