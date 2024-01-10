@@ -67,7 +67,7 @@ export default function AddToCartButton({
    */
   return (
     <form
-      className="text-center flex-1 bg-green-500 text-white w-full"
+      className="text-center flex-1 bg-black text-white w-full"
       action={actionWithId}
     >
       <Submit type={"cart"} />
