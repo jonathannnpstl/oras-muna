@@ -18,7 +18,7 @@ export async function fetchProducts({
   query?: string;
   sortKey?: string | undefined;
   reverse?: boolean;
-  brand?: string | undefined;
+  brand?: string[] | undefined;
   page?: number | undefined;
   caseMaterial?: string[] | undefined;
   bandColor?: string[] | undefined;
@@ -42,13 +42,18 @@ export async function fetchProducts({
     if (dialColor && dialColor?.constructor != Array) {
       dialColor = Array(1).fill(dialColor);
     }
+    if (brand && brand?.constructor != Array) {
+      brand = Array(1).fill(brand);
+    }
 
     let queryObj: any = {};
     if (query) {
       queryObj.name = { $regex: regex };
     }
     if (brand) {
-      queryObj.brand = brand;
+      queryObj.brand = queryObj.brand = {
+        $in: brand.map((obj) => transformStringUpper(obj)),
+      };
     }
     if (caseMaterial) {
       queryObj.case_material = {
@@ -162,6 +167,7 @@ export async function getFilters() {
         };
       })
     );
+
     return filterList;
   } catch (e) {
     console.log(e);

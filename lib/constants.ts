@@ -41,6 +41,7 @@ export const sorting: SortFilterItem[] = [
 ];
 
 export const filterFields: string[] = [
+  "brand",
   "case_material",
   "band_color",
   "dial_color",

@@ -11,13 +11,11 @@ import { useDispatch } from "react-redux";
 import BrandsList from "./brandlist";
 import CheckboxFilter from "./checkboxfilter";
 import { getFiltersList } from "@/lib/redux/features/filterSlice";
-import { getBrandsList } from "@/lib/redux/features/brandSlice";
-
 export default function Filter() {
   const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(getFiltersList());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getFiltersList());
+  // }, []);
   const { filters, loading } = useAppSelector((state) => state.filter);
 
   const color = grey[900];
@@ -36,11 +34,7 @@ export default function Filter() {
           className="w-[250px] text-gray-500 p-2 h-screen overflow-y-scroll text-sm flex flex-col gap-3"
           id="filter-scrollbar"
         >
-          <div className="my-2">
-            <p className="">Brands</p>
-            {/* <BrandsList /> */}
-          </div>
-          <div className="my-2">
+          <div className="mb-20">
             {filters && !loading
               ? filters.map((filter, i) => (
                   <CheckboxFilter

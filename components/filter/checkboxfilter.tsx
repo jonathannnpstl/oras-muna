@@ -15,6 +15,7 @@ export function CheckboxFilterItem({
   const caseMaterial = searchParams.getAll("caseMaterial");
   const dialColor = searchParams.getAll("dialColor");
   const bandColor = searchParams.getAll("bandColor");
+  const brand = searchParams.getAll("brand");
   let newParams = new URLSearchParams(searchParams.toString());
 
   const { _id, count } = JSON.parse(JSON.stringify(value));
@@ -47,6 +48,15 @@ export function CheckboxFilterItem({
       bandColor.map((q) => newParams.append("bandColor", q));
     } else {
       newParams.append("bandColor", name);
+    }
+  } else if (filterCategory && filterCategory === "brand" && name) {
+    if (brand.length >= 1 && brand.includes(name)) {
+      brand.splice(brand.indexOf(name), 1);
+      checked = true;
+      newParams.delete("brand");
+      brand.map((q) => newParams.append("brand", q));
+    } else {
+      newParams.append("brand", name);
     }
   }
 
@@ -112,7 +122,7 @@ export default function CheckboxFilter({
         <div className="flex justify-between">
           {filterCategory}
           {searchParams.getAll(camelCase(filterCategory)).length > 0 ? (
-            <Link className="mr-2" href={href}>
+            <Link className="mr-2 text-red-600" href={href}>
               Clear
             </Link>
           ) : null}

@@ -17,6 +17,7 @@ export default async function SearchPage({
     caseMaterial,
     bandColor,
     dialColor,
+    brand,
   } = searchParams as {
     [key: string]: string;
   };
@@ -27,7 +28,7 @@ export default async function SearchPage({
     query: searchValue ? searchValue : "",
     sortKey,
     reverse,
-    brand: undefined,
+    brand,
     page,
     caseMaterial,
     bandColor,

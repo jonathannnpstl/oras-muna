@@ -1,10 +1,11 @@
 "use client";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Provider } from "react-redux";
 import { makeStore, AppStore } from "@/lib/redux/store";
 import { getFiltersList } from "@/lib/redux/features/filterSlice";
 
 export default function StoreProvider({
+  data,
   children,
 }: {
   children: React.ReactNode;
@@ -12,6 +13,7 @@ export default function StoreProvider({
   const storeRef = useRef<AppStore>();
   if (!storeRef.current) {
     storeRef.current = makeStore();
+    storeRef.current.dispatch(getFiltersList());
   }
 
   return <Provider store={storeRef.current}>{children}</Provider>;

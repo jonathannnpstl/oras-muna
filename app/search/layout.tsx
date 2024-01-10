@@ -3,8 +3,9 @@ import { CardsSkeleton } from "@/components/skeleton";
 import StoreProvider from "./StoreProvider";
 
 import { Suspense } from "react";
+import { getFilters } from "@/lib/api/data";
 
-export default function SearchLayout({
+export default async function SearchLayout({
   children,
 }: {
   children: React.ReactNode;
