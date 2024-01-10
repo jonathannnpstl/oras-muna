@@ -5,7 +5,6 @@ import { makeStore, AppStore } from "@/lib/redux/store";
 import { getFiltersList } from "@/lib/redux/features/filterSlice";
 
 export default function StoreProvider({
-  data,
   children,
 }: {
   children: React.ReactNode;
