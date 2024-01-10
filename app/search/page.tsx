@@ -2,8 +2,6 @@ import ProductsContent from "@/components/products-content";
 import React, { Suspense } from "react";
 import { sorting, defaultSort } from "@/lib/constants";
 import Sort from "@/components/filter/sort";
-import { transformStringUpper } from "@/lib/utils";
-import { getFilters } from "@/lib/api/data";
 
 export default async function SearchPage({
   searchParams,
