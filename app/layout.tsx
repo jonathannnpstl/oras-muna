@@ -4,7 +4,7 @@ import "./globals.css";
 import { Suspense } from "react";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
-import StoreProvider from "./StoreProvider";
+
 const lato = Lato({ subsets: ["latin"], weight: ["400", "700"] });
 
 export const metadata: Metadata = {
@@ -22,9 +22,7 @@ export default function RootLayout({
       <body className={lato.className}>
         <Navbar />
         <Suspense>
-          <StoreProvider>
-            <main className="max-w-6xl m-auto">{children}</main>
-          </StoreProvider>
+          <main className="max-w-6xl m-auto">{children}</main>
         </Suspense>
         <Footer />
       </body>

@@ -1,10 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import productSlice from "./features/productSlice";
 import filterSlice from "./features/filterSlice";
+import modalSlice from "./features/modalSlice";
 
 export const makeStore = () => {
   return configureStore({
-    reducer: { product: productSlice, filter: filterSlice },
+    reducer: { product: productSlice, filter: filterSlice, modal: modalSlice },
   });
 };
 
