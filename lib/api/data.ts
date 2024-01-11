@@ -155,7 +155,7 @@ export async function getFilters() {
             },
             {
               $sort: {
-                count: -1,
+                _id: 1,
               },
             },
           ])
