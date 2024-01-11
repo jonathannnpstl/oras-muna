@@ -23,3 +23,8 @@ export const createUrl = (
 
   return `${pathname}${queryString}`;
 };
+
+export function getTop3SimilarProducts(product: {}, productList: {}[]) {
+  const productItem = Object.values(product);
+  const productListItems = productList.map((item) => Object.values(item));
+}

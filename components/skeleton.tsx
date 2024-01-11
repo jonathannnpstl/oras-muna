@@ -40,7 +40,7 @@ export function ProductShowcaseSkeleton() {
             </div>
           </div>
           <div className="sm:flex sm:gap-x-4 text-sm my-4">
-            <div className="bg-green-200 h-11 w-full "></div>
+            <div className="bg-gray-800 h-11 w-full "></div>
             <div className="w-full bg-gray-100 h-11"></div>
           </div>
           <div className="my-12">

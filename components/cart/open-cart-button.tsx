@@ -11,7 +11,7 @@ export default function OpenCart({ totalQuantity }: { totalQuantity: number }) {
       />
 
       {totalQuantity ? (
-        <div className="absolute right-2 top-2 -mr-2 -mt-2 h-4 w-4 rounded bg-black text-[11px] font-medium text-white">
+        <div className="absolute right-2 top-2 -mr-2 -mt-2 h-4 w-4 rounded bg-blue-600 text-[11px] font-medium text-white">
           {totalQuantity}
         </div>
       ) : null}

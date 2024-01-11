@@ -2,6 +2,8 @@ import ProductsContent from "@/components/products-content";
 import React, { Suspense } from "react";
 import { sorting, defaultSort } from "@/lib/constants";
 import Sort from "@/components/filter/sort";
+import { transformStringUpper } from "@/lib/utils";
+import { getFilters } from "@/lib/api/data";
 
 export default async function SearchPage({
   searchParams,
@@ -35,10 +37,11 @@ export default async function SearchPage({
 
   return (
     <>
-      <Sort />
-      <Suspense key={searchValue}>
-        <ProductsContent q={q} />
-      </Suspense>
+      <div className="w-full order-last min-h-screen md:order-none my-24 px-6">
+        <Suspense key={searchValue}>
+          <ProductsContent q={q} />
+        </Suspense>
+      </div>
     </>
   );
 }

@@ -131,20 +131,11 @@ body::-webkit-scrollbar-thumb {
   }
 
   .sort span {
-    min-width: 135px;
     padding: 5px 15px;
     color: rgb(30 41 59);
     font-size: 1em;
     cursor: pointer;
     display: block;
-  }
-
-  .sort span::after {
-    float: right;
-    right: 10%;
-    content: "+";
-    transform-origin: center;
-    transition: 200ms linear;
   }
 
   .sort .slide {

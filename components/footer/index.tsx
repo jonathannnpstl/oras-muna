@@ -12,7 +12,7 @@ export default function Footer() {
           </p>
         </div>
 
-        <div className="flex  items-center gap-12 p-5">
+        <div className="flex flex-col md:flex-row items-center gap-12 p-5">
           <p>Home</p>
           <p>Brands</p>
           <p>Shop</p>

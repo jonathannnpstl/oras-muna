@@ -5,20 +5,20 @@ import { useAppStore, useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
 import { useRef, useEffect } from "react";
 import { fetchProductsList } from "@/lib/redux/features/productSlice";
 import { CardsSkeleton } from "../skeleton";
+import Sort from "../filter/sort";
 
 export default function ProductsContent({ q }: any) {
   const store = useAppStore();
   const initialized = useRef(false);
-  if (!initialized.current){
-  
+  if (!initialized.current) {
   }
 
   useEffect(() => {
     store.dispatch(fetchProductsList(q));
   }, [q]);
-  
+
   console.log("rendered", q);
-  
+
   const { products, numberOfPages, loading, count } = useAppSelector(
     (state) => state.product
   );
@@ -27,16 +27,19 @@ export default function ProductsContent({ q }: any) {
   return (
     <>
       <div className="flex justify-between items-center">
-        <p className="mb-4 text-gray-600">
-          {loading
-            ? "Searching for results..."
-            : products && products.length != 0 && count
-            ? `Showing ${products?.length} ${resultsText} of ${count}`
-            : "There are no products that match"}
-          {/* <span className="font-bold">&quot;{q.query}&quot;</span> */}
-        </p>
+        <div className="text-sm md:text-base">
+          <p className="text-gray-600">
+            {loading
+              ? "Searching for results..."
+              : products && products.length != 0 && count
+              ? `Showing ${products?.length} ${resultsText} of ${count}`
+              : "There are no products that match"}
+            {/* <span className="font-bold">&quot;{q.query}&quot;</span> */}
+          </p>
+        </div>
+        <Sort />
       </div>
-      <div className="grid w-full grid-cols-auto gap-4">
+      <div className="grid w-full grid-cols-2 md:grid-cols-auto gap-4">
         {products && !loading ? (
           products.map((product: any, index: number) => (
             <ProductCard product={product} key={index} />

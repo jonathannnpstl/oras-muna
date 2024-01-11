@@ -221,3 +221,5 @@ export async function getCart(id?: string) {
     console.error(e);
   }
 }
+
+export async function getSimilarProducts(id: string) {}
