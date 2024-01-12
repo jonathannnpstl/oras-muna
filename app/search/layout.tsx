@@ -17,7 +17,6 @@ export default async function SearchLayout({
           <Suspense fallback={<CardsSkeleton />}>
             <Filter />
           </Suspense>
-
           {children}
         </div>
       </Suspense>

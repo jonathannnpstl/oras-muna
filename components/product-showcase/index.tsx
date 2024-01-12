@@ -2,9 +2,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Details from "./details";
-import AddToCartButton, {
-  AddToWishlistButton,
-} from "../cart/add-to-cart-button";
+import AddToCartButton, { AddToWishlistButton } from "../cart/add-item";
 import EditQtyButton from "../cart/edit-qty-button";
 import "simple-line-icons";
 import clsx from "clsx";

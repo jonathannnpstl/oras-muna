@@ -222,4 +222,60 @@ export async function getCart(id?: string) {
   }
 }
 
-export async function getSimilarProducts(id: string) {}
+export async function getWishlist(id?: string) {
+  try {
+    const client = await clientPromise;
+    const db = client.db("oras-muna-db");
+
+    const wishlist = await db
+      .collection("wishlists")
+      .findOne({ _id: new ObjectId(id) });
+    const productList = JSON.parse(JSON.stringify(wishlist)).products;
+
+    let fetchProductsResult: ProductsCart[] = [];
+    await Promise.all(
+      productList.map(async (product: any) => {
+        fetchProductsResult.push(await fetchProduct(product.id));
+      })
+    );
+
+    /**
+     * products : {items , qnty}
+     * total: number
+     */
+
+    //sort by date of addtocart
+    fetchProductsResult.sort(function (a: any, b: any): any {
+      return b.date - a.date;
+    });
+
+    let result: {
+      products: ProductsCart[];
+    } = { products: fetchProductsResult };
+    return result;
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+export async function getRandomProducts() {
+  try {
+    const client = await clientPromise;
+    const db = client.db("oras-muna-db");
+
+    const data = await db
+      .collection("products")
+      .aggregate([
+        {
+          $sample: {
+            size: 3,
+          },
+        },
+      ])
+      .toArray();
+
+    return JSON.parse(JSON.stringify(data));
+  } catch (e) {
+    console.log(e);
+  }
+}

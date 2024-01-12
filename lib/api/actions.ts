@@ -44,6 +44,42 @@ export async function addToCart(
   }
 }
 
+export async function addToWishlist(
+  wishlistId: string | undefined,
+  productID: string | undefined
+) {
+  try {
+    const client = await clientPromise;
+    const db = client.db("oras-muna-db");
+    const wishlist = await db
+      .collection("wishlists")
+      .findOne({ _id: new ObjectId(wishlistId) });
+    console.log("CART: ", wishlist);
+
+    wishlist?.products.map((productId: string) => {
+      if (productId && productId === productID) {
+        return;
+      }
+    });
+
+    //if product is not yet in the cart
+    wishlist?.products.unshift({
+      id: productID,
+      date: Date.now(),
+    });
+
+    await db.collection("wishlists").updateOne(
+      { _id: new ObjectId(wishlistId) },
+      {
+        $set: { products: wishlist?.products },
+      }
+    );
+    return "Success";
+  } catch (e) {
+    console.error(e);
+  }
+}
+
 export async function createCart() {
   try {
     const client = await clientPromise;
@@ -55,6 +91,22 @@ export async function createCart() {
     };
 
     const document = await db.collection("carts").insertOne(data);
+    return JSON.parse(JSON.stringify(document));
+  } catch (e) {
+    console.error(e);
+  }
+}
+export async function createWishlist() {
+  try {
+    const client = await clientPromise;
+    const db = client.db("oras-muna-db");
+    const data = {
+      userId: "Auto generated to",
+      status: false,
+      products: [],
+    };
+
+    const document = await db.collection("wishlists").insertOne(data);
     return JSON.parse(JSON.stringify(document));
   } catch (e) {
     console.error(e);

@@ -1,6 +1,6 @@
 import React from "react";
 import { useFormState, useFormStatus } from "react-dom";
-import { addItem } from "./actions";
+import { addItemToCart, addItemToWishlist } from "./actions";
 import clsx from "clsx";
 
 function Submit(prop: { type: string }) {
@@ -33,8 +33,8 @@ function Submit(prop: { type: string }) {
 }
 
 export function AddToWishlistButton({ id }: { id: string }) {
-  // const [message, formAction] = useFormState(addItem, null);
-  // const actionWithId = formAction.bind(null, { id: id });
+  const [message, formAction] = useFormState(addItemToWishlist, null);
+  const actionWithId = formAction.bind(null, id);
   return (
     <form
       className="text-center text-gray-800 w-full sm:m-0 flex-1"
@@ -57,10 +57,10 @@ export default function AddToCartButton({
 
   //so this is how it works:
   //Make a cart for the unknown user, create a generated 'user id'
-  //Store it in the local storage, the 'user id' and if unknown user
-  //signed up, the user id will be replaced by the email of the user
+  //Store it in the local storage, the 'user id', and if unknown user
+  //signed up, the user id will be replaced by the email used to sign up
 
-  const [message, formAction] = useFormState(addItem, null);
+  const [message, formAction] = useFormState(addItemToCart, null);
   const actionWithId = formAction.bind(null, { id: id, quantity });
   /**
    * include date when the adding item happened
