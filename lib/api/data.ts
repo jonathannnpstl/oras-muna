@@ -258,7 +258,7 @@ export async function getWishlist(id?: string) {
   }
 }
 
-export async function getRandomProducts() {
+export async function getRandomProducts(id: string) {
   try {
     const client = await clientPromise;
     const db = client.db("oras-muna-db");
@@ -267,8 +267,15 @@ export async function getRandomProducts() {
       .collection("products")
       .aggregate([
         {
+          $match: {
+            _id: {
+              $ne: new ObjectId(id),
+            },
+          },
+        },
+        {
           $sample: {
-            size: 3,
+            size: 4,
           },
         },
       ])
