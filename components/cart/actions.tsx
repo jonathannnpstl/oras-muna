@@ -1,12 +1,17 @@
 "use server";
 
-import { getCart } from "@/lib/api/data";
-import { addToCart } from "@/lib/api/actions";
+import { getCart, getWishlist } from "@/lib/api/data";
+import { addToCart, addToWishlist } from "@/lib/api/actions";
 import { revalidatePath, revalidateTag } from "next/cache";
-import { updateCart, removeFromCart, createCart } from "@/lib/api/actions";
+import {
+  updateCart,
+  removeFromCart,
+  createCart,
+  createWishlist,
+} from "@/lib/api/actions";
 import { cookies } from "next/headers";
 
-export async function addItem(
+export async function addItemToCart(
   previousState: any,
   product: { id: string; quantity: number }
 ) {
@@ -31,14 +36,39 @@ export async function addItem(
   }
 }
 
+export async function addItemToWishlist(previousState: any, id: string) {
+  //the user can only add to wishlist when already signed up
+  //therefore, the wishlist will contain the user id
+  //Create a collections "wishlist" to store the wishlist of the user
+  //store the WISHlist id associated with the user email
+
+  let wishlistId: any = cookies().get("cartId")?.value;
+  let wishlist: any;
+
+  if (wishlistId) {
+    wishlist = await getWishlist(wishlistId);
+  }
+
+  if (!wishlistId || !wishlist) {
+    wishlist = await createWishlist();
+    wishlistId = wishlist?.insertedId;
+    cookies().set("wishlistId", wishlistId);
+  }
+
+  try {
+    await addToWishlist(wishlistId, id);
+    revalidateTag("wishlist");
+  } catch (e) {
+    return "Error adding item to wishlist";
+  }
+}
+
 export async function removeItemFromCart(
   prevState: any,
   product: {
     id: string;
   }
 ) {
-  console.log("Clicked");
-
   const cartId = cookies().get("cartId")?.value;
 
   if (!cartId) {
