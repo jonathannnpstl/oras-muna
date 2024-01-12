@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Footer() {
   return (
-    <div className="h-full w-full bg-white shadow border-t-[1px]  border-gray-500 border-solid">
+    <div className="h-full w-full bg-white shadow border-t-[1px]  border-gray-500 border-solid mt-[200px]">
       <div className="flex items-center justify-center flex-col p-6">
         <div className="flex justify-center flex-col w-full md:w-1/2 p-4">
           <p className="text-center  p-3 text-xl">ORAS-MUNA</p>
@@ -11,7 +11,6 @@ export default function Footer() {
             id lobortis nunc. Curabitur elementum at metus quis elementum.{" "}
           </p>
         </div>
-
         <div className="flex flex-col md:flex-row items-center gap-12 p-5">
           <p>Home</p>
           <p>Brands</p>

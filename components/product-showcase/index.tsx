@@ -1,14 +1,28 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import Image from "next/image";
 import Details from "./details";
 import AddToCartButton, { AddToWishlistButton } from "../cart/add-item";
 import EditQtyButton from "../cart/edit-qty-button";
 import "simple-line-icons";
+import { EmblaOptionsType } from "embla-carousel";
+import useEmblaCarousel from "embla-carousel-react";
+import { Thumb } from "./thumb";
 import clsx from "clsx";
+import SuggestedProducts from "./suggested-product";
+import ProductCard from "../product-card";
+import { Product } from "@/lib/definition";
 
-export default function ProductShowcase({ product }: any) {
+export default function ProductShowcase({ product, suggestedProducts }: any) {
+  console.log(suggestedProducts);
+  console.log(product);
+
+  const slides = Array.from(Array(product.images.length).keys());
+  const options: EmblaOptionsType = {};
+  const [emblaRef] = useEmblaCarousel(options);
   const imageArray: string[] = product.images;
+  const imageByIndex = (index: number): string =>
+    imageArray[index % imageArray.length];
   const details = [
     {
       id: 1,
@@ -33,8 +47,12 @@ export default function ProductShowcase({ product }: any) {
   ];
   const [quantity, setQuantity] = useState<number>(1);
   const [openDetailId, setOpenDetailId] = useState<number | string>("");
-  const [img, setImage] = useState<string>(product.images[0]);
-  const [pastIndex, setPastIndex] = useState<number>(0);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [emblaMainRef, emblaMainApi] = useEmblaCarousel(options);
+  const [emblaThumbsRef, emblaThumbsApi] = useEmblaCarousel({
+    containScroll: "keepSnaps",
+    dragFree: true,
+  });
   const active = true;
   const handleDetailOpen = (e: React.MouseEvent, id: number) => {
     e.preventDefault();
@@ -52,69 +70,61 @@ export default function ProductShowcase({ product }: any) {
     }
   };
 
-  const handleImage = (e: React.MouseEvent<HTMLElement>) => {
-    e.preventDefault();
-    const imagePath = e.currentTarget.getAttribute("data-image-index");
-    let index = parseInt(imagePath ? imagePath : "0");
+  const onThumbClick = useCallback(
+    (index: number) => {
+      if (!emblaMainApi || !emblaThumbsApi) return;
+      emblaMainApi.scrollTo(index);
+    },
+    [emblaMainApi, emblaThumbsApi]
+  );
 
-    if (index < 0) {
-      index = pastIndex - 1 < 0 ? imageArray.length - 1 : pastIndex - 1;
-    }
-    if (index > imageArray.length - 1) {
-      index = pastIndex + 1 > imageArray.length - 1 ? 0 : pastIndex + 1;
-    }
-    setPastIndex(index);
-    setImage(imageArray[index]);
-  };
+  const onSelect = useCallback(() => {
+    if (!emblaMainApi || !emblaThumbsApi) return;
+    setSelectedIndex(emblaMainApi.selectedScrollSnap());
+    emblaThumbsApi.scrollTo(emblaMainApi.selectedScrollSnap());
+  }, [emblaMainApi, emblaThumbsApi, setSelectedIndex]);
+
+  useEffect(() => {
+    if (!emblaMainApi) return;
+    onSelect();
+    emblaMainApi.on("select", onSelect);
+    emblaMainApi.on("reInit", onSelect);
+  }, [emblaMainApi, onSelect]);
 
   return (
-    <div className="max-h max-full">
+    <div className="max-h max-full my-12">
       <div className="md:flex">
         <div className="sm:shrink-0 grow shrink basis-0 p-6 self-start">
-          <div className="relative">
-            <i
-              data-image-index={"-1"}
-              className="icon-arrow-left scale-[2] absolute top-[50%] left-[15px] cursor-pointer hover:left-[10px]"
-              onClick={(e) => handleImage(e)}
-            ></i>
-            <Image
-              src={img}
-              width={500}
-              height={600}
-              className="h-48 w-full object-contain sm:h-[350px] sm:max-w-xs m-auto aspect-auto"
-              alt="An audemars piguet watch"
-            />
-            <i
-              data-image-index={imageArray.length}
-              className="icon-arrow-right scale-[2] absolute top-[50%] right-[15px] cursor-pointer hover:right-[10px]"
-              onClick={(e) => handleImage(e)}
-            ></i>
-          </div>
-          <div className="flex gap-5 justify-center mt-6">
-            {imageArray &&
-              imageArray.map((image, index) => {
-                return (
-                  <div
-                    key={index}
-                    className={clsx(
-                      "w-[75px] h-[75px] border-[1px] border-solid cursor-pointer",
-                      {
-                        "border-black": index == pastIndex,
-                      }
-                    )}
-                    onClick={(e) => handleImage(e)}
-                    data-image-index={index}
-                  >
-                    <Image
-                      src={image}
-                      width={100}
-                      height={100}
-                      alt="Some image"
-                      className="aspect-auto object-contain h-full"
+          <div className="embla">
+            <div className="embla__viewport" ref={emblaMainRef}>
+              <div className="embla__container">
+                {slides.map((index) => (
+                  <div className="embla__slide" key={index}>
+                    <img
+                      className="embla__slide__img"
+                      src={imageByIndex(index)}
+                      alt="Your alt text"
                     />
                   </div>
-                );
-              })}
+                ))}
+              </div>
+            </div>
+
+            <div className="embla-thumbs">
+              <div className="embla-thumbs__viewport" ref={emblaThumbsRef}>
+                <div className="embla-thumbs__container">
+                  {slides.map((index) => (
+                    <Thumb
+                      onClick={() => onThumbClick(index)}
+                      selected={index === selectedIndex}
+                      index={index}
+                      imgSrc={imageByIndex(index)}
+                      key={index}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -135,10 +145,6 @@ export default function ProductShowcase({ product }: any) {
             <p className="text-gray-800 my-12">Quantity</p>
             <div className="qty-input items-center mx-[20px] sm:mx-[50px]">
               <div className="ml-auto flex h-9 flex-row items-center ">
-                {/* <EditQtyButton
-                  operation={"minus"}
-                  handleClick={handleQuantity}
-                /> */}
                 <button
                   data-type="minus"
                   className="ease flex h-full min-w-[36px] max-w-[36px]  flex-none items-center justify-center px-2 transition-all duration-200 hover:border-neutral-800 hover:opacity-80"
@@ -182,6 +188,20 @@ export default function ProductShowcase({ product }: any) {
           </div>
         </div>
       </div>
+      {/* <ProductCard product={suggestedProducts[0]} /> */}
+      <div className="my-28">
+        <p className="text-xl">SEE MORE LIKE THIS</p>
+        <div className="flex flex-wrap sm:flex-nowrap justify-center mb-[200px]">
+          {suggestedProducts.map((product: Product, i: number) => {
+            return (
+              <div className="w-[200px] sm:w-full">
+                <ProductCard product={product} />
+              </div>
+            );
+          })}
+        </div>
+      </div>
+      {/* <SuggestedProducts suggestedProducts={suggestedProducts} /> */}
     </div>
   );
 }

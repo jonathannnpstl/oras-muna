@@ -38,7 +38,7 @@ export function AddToWishlistButton({ id }: { id: string }) {
   return (
     <form
       className="text-center text-gray-800 w-full sm:m-0 flex-1"
-      // action={actionWithId}
+      action={actionWithId}
     >
       <Submit type={"wishlist"} />
     </form>
