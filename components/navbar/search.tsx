@@ -51,10 +51,7 @@ export default function Search() {
   }
 
   return (
-    <form
-      onSubmit={onSubmit}
-      className="w-max-[850px] relative w-full xl:w-full"
-    >
+    <form onSubmit={onSubmit} className="w-max-[650px] relative xl:w-full">
       <input
         key={searchParams?.get("query")}
         type="text"
@@ -62,10 +59,10 @@ export default function Search() {
         placeholder="Search products..."
         autoComplete="off"
         defaultValue={searchParams.get("query")?.toString()}
-        className="w-full border-b outline-none bg-white px-4 py-2 text-sm text-black border-gray-900 placeholder:border-gray-600"
+        className="w-full focus:border border-b outline-none bg-white px-4 py-3 text-sm text-black focus:border-gray-900 placeholder:border-gray-600"
       />
       <div className="absolute right-0 top-0 mr-3 flex h-full items-center">
-        <MagnifyingGlassIcon className="h-4" />
+        <MagnifyingGlassIcon className="h-5" />
       </div>
     </form>
   );

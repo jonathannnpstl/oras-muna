@@ -6,6 +6,8 @@ export async function addToCart(
   productID: string | undefined,
   quantity: number
 ) {
+  console.log("Server: ", cartId);
+
   try {
     let exist: boolean = false;
     const client = await clientPromise;

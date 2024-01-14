@@ -9,6 +9,7 @@ export type Product = {
   band_color: string;
   case_material: string;
   dial_color: string;
+  stock: number;
 
   // quantity: number;
 };

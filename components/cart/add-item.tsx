@@ -3,17 +3,18 @@ import { useFormState, useFormStatus } from "react-dom";
 import { addItemToCart, addItemToWishlist } from "./actions";
 import clsx from "clsx";
 
-function Submit(prop: { type: string }) {
+function Submit(prop: { type: string; stock: number }) {
   const { pending } = useFormStatus();
 
-  const type = prop.type === "cart" ? "ADD TO CART" : "ADD TO WISHLIST";
+  const type = prop.stock >= 1 ? "ADD TO CART" : "OUT OF STOCK";
+  const disable = pending || prop.stock === 0;
 
   return (
     <button
-      disabled={pending}
+      disabled={disable}
       type="submit"
       className={clsx("w-full h-full showcase-btn ", {
-        "cursor-not-allowed": pending,
+        "cursor-not-allowed": disable,
       })}
     >
       {pending ? (
@@ -32,25 +33,27 @@ function Submit(prop: { type: string }) {
   );
 }
 
-export function AddToWishlistButton({ id }: { id: string }) {
-  const [message, formAction] = useFormState(addItemToWishlist, null);
-  const actionWithId = formAction.bind(null, id);
-  return (
-    <form
-      className="text-center text-gray-800 w-full sm:m-0 flex-1"
-      action={actionWithId}
-    >
-      <Submit type={"wishlist"} />
-    </form>
-  );
-}
+// export function AddToWishlistButton({ id }: { id: string }) {
+//   const [message, formAction] = useFormState(addItemToWishlist, null);
+//   const actionWithId = formAction.bind(null, id);
+//   return (
+//     <form
+//       className="text-center text-gray-800 w-full sm:m-0 flex-1"
+//       action={actionWithId}
+//     >
+//       <Submit type={"wishlist"} />
+//     </form>
+//   );
+// }
 
 export default function AddToCartButton({
   id,
   quantity,
+  stock,
 }: {
   id: string;
   quantity: number;
+  stock: number;
 }) {
   //want to make the cart modal to open when add to cart button is clicked
   //rn, i dont know how to do that
@@ -70,7 +73,7 @@ export default function AddToCartButton({
       className="text-center flex-1 bg-black text-white w-full"
       action={actionWithId}
     >
-      <Submit type={"cart"} />
+      <Submit type={"cart"} stock={stock} />
     </form>
   );
 }
