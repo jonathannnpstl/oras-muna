@@ -15,8 +15,11 @@ export const fetchProductsList = createAsyncThunk(
       query?: string;
       sortKey?: string | undefined;
       reverse?: boolean;
-      brand?: string | undefined;
       skip?: number | undefined;
+      caseMaterial?: string[] | undefined;
+      bandColor?: string[] | undefined;
+      dialColor?: string[] | undefined;
+      brand?: string[] | undefined;
     },
     thunkAPI
   ) => {

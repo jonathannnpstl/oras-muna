@@ -1,13 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Slider from "@mui/material/Slider";
 import { grey } from "@mui/material/colors";
-import { BrandItemList } from "./brand";
-import { getBrands } from "@/lib/api/data";
-import Dropdowns from "./dropdowns";
 import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
-import { useDispatch } from "react-redux";
 import CheckboxFilter from "./checkboxfilter";
 import { getFiltersList } from "@/lib/redux/features/filterSlice";
 import { XMarkIcon } from "@heroicons/react/24/outline";
