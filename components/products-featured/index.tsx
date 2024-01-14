@@ -1,15 +1,17 @@
-import React from "react";
+import React, { Suspense, useEffect } from "react";
 import ProductsContent from "../products-content";
 import { Antic_Didone } from "next/font/google";
-import { Product } from "@/lib/definition";
+import { CardsSkeleton } from "../skeleton";
 
 const antic_didone = Antic_Didone({ subsets: ["latin"], weight: "400" });
 
-export default function ProductsFeatured({
-  products,
-}: {
-  products: Product[];
-}) {
+export default async function ProductsFeatured() {
+  const q = {
+    query: "",
+    sortKey: undefined,
+    reverse: false,
+    brand: undefined,
+  };
   return (
     <>
       <div className="text-8xl antialiased tracking-wide my-40">
@@ -19,7 +21,9 @@ export default function ProductsFeatured({
         </h2>
       </div>
       <p className="text-lg">Featured</p>
-      <ProductsContent products={products} />
+      <Suspense fallback={<CardsSkeleton />}>
+        {<ProductsContent q={q} />}
+      </Suspense>
     </>
   );
 }

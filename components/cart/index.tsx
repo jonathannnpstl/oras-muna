@@ -1,5 +1,6 @@
 import CartModal from "./modal";
 import { cookies } from "next/headers";
+import { getCart } from "@/lib/api/data";
 
 export default async function Cart() {
   const cartId = cookies().get("cartId")?.value;
@@ -8,5 +9,6 @@ export default async function Cart() {
   if (cartId) {
     cart = await getCart(cartId);
   }
+
   return <CartModal cart={cart} />;
 }

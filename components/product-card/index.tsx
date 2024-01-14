@@ -4,14 +4,14 @@ import Link from "next/link";
 import { transformStringLower } from "@/lib/utils";
 
 export default function ProductCard({ product }: { product: Product }) {
-  const { brand, name, img, price, _id } = product;
+  const { brand, name, images, price, _id } = product;
 
   return (
     <div className="card w-full max-h-fit relative overflow-hidden cursor-pointer text-center">
       <Link href={`/product/${_id}`}>
-        <div className="w-full px-10 pt-2 ">
+        <div className="w-full px-2 sm:px-10 pt-2 ">
           <Image
-            src={`/img/${img}`}
+            src={`${images[0]}`}
             width={150}
             height={0}
             style={{ width: "100%", height: "auto" }}

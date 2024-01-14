@@ -26,6 +26,24 @@ body {
     rgb(var(--background-start-rgb));
 } */
 
+body {
+  background-color: #fefefe;
+}
+
+body::-webkit-scrollbar {
+  width: 4px;
+}
+
+body::-webkit-scrollbar-track {
+  background-color: transparent;
+  /* border: 1.5px solid #7e7e7e; */
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #000000;
+  border: 1px solid #616161;
+}
+
 @layer components {
   .card-child::before {
     opacity: 0;
@@ -113,20 +131,11 @@ body {
   }
 
   .sort span {
-    min-width: 135px;
     padding: 5px 15px;
     color: rgb(30 41 59);
     font-size: 1em;
     cursor: pointer;
     display: block;
-  }
-
-  .sort span::after {
-    float: right;
-    right: 10%;
-    content: "+";
-    transform-origin: center;
-    transition: 200ms linear;
   }
 
   .sort .slide {
@@ -140,7 +149,7 @@ body {
     z-index: 9;
   }
 
-  .sort .slide li {
+  /* .sort .slide li {
     color: rgb(30 41 59);
     padding: 5px 15px;
     background: white;
@@ -149,7 +158,7 @@ body {
 
   .sort .slide li:hover {
     background-color: rgb(229 231 235);
-  }
+  } */
 
   #touch {
     position: absolute;
@@ -158,10 +167,244 @@ body {
   }
 
   #touch:checked + .slide {
-    height: 300px;
+    height: fit-content;
   }
 
   #touch:checked + span::after {
     transform: rotate(45deg);
+  }
+
+  /**
+  LOADINGGGG
+  */
+
+  @keyframes rotate-loading {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes loading-text-opacity {
+    0% {
+      opacity: 0;
+    }
+    20% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  .loading-container,
+  .loading {
+    position: relative;
+    border-radius: 100%;
+  }
+
+  .loading-container {
+    margin: 0px auto;
+  }
+
+  .loading {
+    border: 2px solid transparent;
+    animation: rotate-loading 1.5s linear 0s infinite normal;
+    transform-origin: 50% 50%;
+  }
+
+  /* .showcase .loading {
+    border-color: transparent #fff transparent #fff;
+  } */
+
+  .cart .loading {
+    border-color: transparent #1f2937 transparent #1f2937;
+  }
+
+  .loading-container:hover .loading,
+  .loading-container .loading {
+    transition: all 0.5s ease-in-out;
+  }
+  #filter-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  #filter-scrollbar::-webkit-scrollbar-track {
+    background-color: transparent;
+    /* border: 1.5px solid #7e7e7e; */
+  }
+
+  #filter-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #000000;
+    border: 1px solid #616161;
+  }
+
+  .checkbox-wrapper {
+    --size: 1rem;
+    --background: #000000;
+    font-size: var(--size);
+  }
+
+  .checkbox-wrapper *,
+  .checkbox-wrapper *::after {
+    box-sizing: border-box;
+  }
+
+  .checkbox-wrapper input[type="checkbox"] {
+    visibility: hidden;
+    display: none;
+  }
+
+  .checkbox-wrapper .checkbox__label {
+    width: var(--size);
+  }
+  .checkbox-wrapper .checkbox__label:after {
+    height: var(--size);
+    width: var(--size);
+    position: absolute;
+    top: calc(var(--size) * 0.2);
+    left: 0;
+    background: #fefefe;
+    content: " ";
+    display: block;
+    border: 1px solid black;
+    transition: 200ms;
+  }
+
+  .checkbox-wrapper .checkbox__label:after {
+    transition: 100ms ease-in-out;
+  }
+
+  .checkbox-wrapper .checkbox__input:checked ~ .checkbox__label:after {
+    background-color: black;
+  }
+
+  .checkbox-wrapper .checkbox {
+    position: relative;
+    display: flex;
+    gap: 4px;
+    cursor: pointer;
+    align-items: center;
+    /* Mobile Safari: */
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
+
+  .embla {
+    --slide-spacing: 1rem;
+    --slide-size: 100%;
+    --slide-height: 19rem;
+    padding: 1.6rem;
+  }
+  .embla__viewport {
+    overflow: hidden;
+  }
+  .embla__container {
+    backface-visibility: hidden;
+    display: flex;
+    touch-action: pan-y;
+    margin-left: calc(var(--slide-spacing) * -1);
+  }
+  .embla__slide {
+    flex: 0 0 var(--slide-size);
+    min-width: 0;
+    padding-left: var(--slide-spacing);
+    position: relative;
+  }
+  .embla__slide__img {
+    display: block;
+    height: var(--slide-height);
+    width: 100%;
+    object-fit: contain;
+  }
+
+  .embla__slide__number > span {
+    color: var(--brand-primary);
+    background-image: linear-gradient(
+      45deg,
+      var(--brand-primary),
+      var(--brand-secondary)
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 1.6rem;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  .embla-thumbs {
+    --thumbs-slide-spacing: 0.8rem;
+    --thumbs-slide-height: 9rem;
+    margin-top: var(--thumbs-slide-spacing);
+  }
+  .embla-thumbs__viewport {
+    overflow: hidden;
+  }
+  .embla-thumbs__container {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    margin-left: calc(var(--thumbs-slide-spacing) * -1);
+  }
+  .embla-thumbs__slide {
+    flex: 0 0 28%;
+    min-width: 0;
+    position: relative;
+  }
+  @media (min-width: 576px) {
+    .embla-thumbs__slide {
+      flex: 0 0 18%;
+    }
+  }
+  .embla-thumbs__slide__button {
+    -webkit-appearance: none;
+    background-color: transparent;
+    touch-action: manipulation;
+    display: block;
+    text-decoration: none;
+    cursor: pointer;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    opacity: 0.2;
+    transition: opacity 0.2s;
+  }
+  .embla-thumbs__slide--selected .embla-thumbs__slide__button {
+    border: 1px solid black;
+    opacity: 1;
+  }
+  .embla-thumbs__slide__img {
+    display: block;
+    height: var(--thumbs-slide-height);
+    height: 100px;
+    width: 100px;
+    object-fit: contain;
+  }
+
+  .embla-thumbs__slide__number > span {
+    color: var(--brand-primary);
+    background-image: linear-gradient(
+      45deg,
+      var(--brand-primary),
+      var(--brand-secondary)
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 1.4rem;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
   }
 }

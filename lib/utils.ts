@@ -4,7 +4,14 @@ export function transformStringLower(name: string) {
   return name.replace(/\s+/g, "-").toLowerCase();
 }
 export function transformStringUpper(name: string) {
-  return name.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+  return name.replace(/-|_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+}
+
+export function camelCase(name: string) {
+  let ans = name.toLowerCase();
+  return ans
+    .split(" ")
+    .reduce((s, c) => s + (c.charAt(0).toUpperCase() + c.slice(1)));
 }
 
 export const createUrl = (
@@ -16,3 +23,8 @@ export const createUrl = (
 
   return `${pathname}${queryString}`;
 };
+
+export function getTop3SimilarProducts(product: {}, productList: {}[]) {
+  const productItem = Object.values(product);
+  const productListItems = productList.map((item) => Object.values(item));
+}
