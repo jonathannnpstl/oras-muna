@@ -198,7 +198,7 @@ export default function ProductShowcase({ product, suggestedProducts }: any) {
         <div className="flex flex-wrap sm:flex-nowrap justify-center mb-[200px]">
           {suggestedProducts.map((product: Product, i: number) => {
             return (
-              <div className="w-[200px] sm:w-full">
+              <div className="w-[200px] sm:w-full" key={i}>
                 <ProductCard product={product} />
               </div>
             );
