@@ -26,15 +26,6 @@ export default function CartModal({ cart }: any) {
     }
   }, [isOpen, cart?.totalQuantity, quantityRef]);
 
-  const handleQuantity = (operation: "-" | "+") => {
-    if (operation === "-" && quantity > 1) {
-      setQuantity(quantity - 1);
-    }
-    if (operation === "+") {
-      setQuantity(quantity + 1);
-    }
-  };
-
   return (
     <>
       <button aria-label="Open cart" onClick={openCart}>
@@ -72,7 +63,7 @@ export default function CartModal({ cart }: any) {
               </div>
               <div className="flex h-full flex-col justify-between overflow-hidden p-1 text-gray-800">
                 <ul className="flex-grow overflow-auto py-4">
-                  {cart && cart.products
+                  {cart && cart.products && cart.products.length > 0
                     ? cart.products.map((product: any) => {
                         return (
                           <li

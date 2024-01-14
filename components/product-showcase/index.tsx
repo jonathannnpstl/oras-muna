@@ -2,7 +2,7 @@
 import React, { useState, useCallback, useEffect } from "react";
 import Image from "next/image";
 import Details from "./details";
-import AddToCartButton, { AddToWishlistButton } from "../cart/add-item";
+import AddToCartButton from "../cart/add-item";
 import EditQtyButton from "../cart/edit-qty-button";
 import "simple-line-icons";
 import { EmblaOptionsType } from "embla-carousel";
@@ -65,7 +65,7 @@ export default function ProductShowcase({ product, suggestedProducts }: any) {
     if (type && type === "minus" && quantity > 1) {
       setQuantity(quantity - 1);
     }
-    if (type && type === "plus") {
+    if (type && type === "plus" && quantity < product.stock) {
       setQuantity(quantity + 1);
     }
   };
@@ -169,8 +169,12 @@ export default function ProductShowcase({ product, suggestedProducts }: any) {
           </div>
           {/**create a button component??? */}
           <div className="sm:flex sm:gap-x-4 text-sm sm:text-base">
-            <AddToCartButton id={product._id} quantity={quantity} />
-            <AddToWishlistButton id={product._id} />
+            <AddToCartButton
+              id={product._id}
+              quantity={quantity}
+              stock={product.stock}
+            />
+            {/* <AddToWishlistButton id={product._id} /> */}
           </div>
           <div className="my-12">
             {details.map((detail) => {
