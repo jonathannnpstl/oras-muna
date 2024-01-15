@@ -384,8 +384,7 @@ body::-webkit-scrollbar-thumb {
   .embla-thumbs__slide__img {
     display: block;
     height: var(--thumbs-slide-height);
-    height: 100px;
-    width: 100px;
+
     object-fit: contain;
   }
 

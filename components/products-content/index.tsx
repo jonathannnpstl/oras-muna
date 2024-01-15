@@ -17,8 +17,6 @@ export default function ProductsContent({ q }: any) {
     store.dispatch(fetchProductsList(q));
   }, [q]);
 
-  console.log("rendered", q);
-
   const { products, numberOfPages, loading, count } = useAppSelector(
     (state) => state.product
   );

@@ -8,8 +8,8 @@ export default async function Banner() {
     <>
       <HeroSection />
       <div className="my-36">
-        <p className="text-xl sm:text-3xl tracking-widest my-6">BRANDS</p>
-        <div className="w-full grid grid-cols-2 grid-rows-2 md:grid-cols-4 md:grid-rows-2 gap-2 aspect-square justify-center items-center p-4 sm:p-32 bg-black">
+        <p className="text-xl sm:text-3xl tracking-widest my-6 px-2">BRANDS</p>
+        <div className="w-full grid grid-cols grid-rows-auto md:grid-cols-4 md:grid-rows-2 gap-2 aspect-square justify-center items-center p-6  sm:p-32 bg-black">
           <div className="md:row-span-3 md:col-span-3 w-full h-full aspect-square object-contain relative">
             <Link
               href="/search?brand=kross-studio"

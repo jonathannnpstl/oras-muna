@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
 import CheckboxFilter from "./checkboxfilter";
 import { getFiltersList } from "@/lib/redux/features/filterSlice";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import { closeModal, openModal } from "@/lib/redux/features/modalSlice";
+import { closeModal } from "@/lib/redux/features/modalSlice";
 import clsx from "clsx";
 import { usePathname, useSearchParams } from "next/navigation";
 import Link from "next/link";

@@ -3,20 +3,14 @@ import React, { useState, useCallback, useEffect } from "react";
 import Image from "next/image";
 import Details from "./details";
 import AddToCartButton from "../cart/add-item";
-import EditQtyButton from "../cart/edit-qty-button";
 import "simple-line-icons";
 import { EmblaOptionsType } from "embla-carousel";
 import useEmblaCarousel from "embla-carousel-react";
 import { Thumb } from "./thumb";
-import clsx from "clsx";
-import SuggestedProducts from "./suggested-product";
 import ProductCard from "../product-card";
 import { Product } from "@/lib/definition";
 
 export default function ProductShowcase({ product, suggestedProducts }: any) {
-  console.log(suggestedProducts);
-  console.log(product);
-
   const slides = Array.from(Array(product.images.length).keys());
   const options: EmblaOptionsType = {};
   const [emblaRef] = useEmblaCarousel(options);
@@ -53,7 +47,7 @@ export default function ProductShowcase({ product, suggestedProducts }: any) {
     containScroll: "keepSnaps",
     dragFree: true,
   });
-  const active = true;
+
   const handleDetailOpen = (e: React.MouseEvent, id: number) => {
     e.preventDefault();
     setOpenDetailId(id !== openDetailId ? id : "");
@@ -100,10 +94,13 @@ export default function ProductShowcase({ product, suggestedProducts }: any) {
               <div className="embla__container">
                 {slides.map((index) => (
                   <div className="embla__slide" key={index}>
-                    <img
-                      className="embla__slide__img"
+                    <Image
+                      priority={true}
                       src={imageByIndex(index)}
                       alt="Your alt text"
+                      width={500}
+                      className="embla__slide__img"
+                      height={500}
                     />
                   </div>
                 ))}
@@ -205,7 +202,6 @@ export default function ProductShowcase({ product, suggestedProducts }: any) {
           })}
         </div>
       </div>
-      {/* <SuggestedProducts suggestedProducts={suggestedProducts} /> */}
     </div>
   );
 }

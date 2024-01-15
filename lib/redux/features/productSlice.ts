@@ -56,7 +56,6 @@ export const productSlice = createSlice({
       state.numberOfPages = action.payload.numberOfPages;
       state.loading = false;
       state.count = action.payload.count;
-      console.log(current(state));
     });
     builder.addCase(fetchProductsList.pending, (state) => {
       state.loading = true;

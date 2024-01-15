@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
-import { Lato } from "next/font/google";
-import "./globals.css";
+import { Lato, Antic_Didone } from "next/font/google";
+import "../globals.css";
+import { Suspense } from "react";
+import Navbar from "@/components/navbar";
+import Footer from "@/components/footer";
 
 const lato = Lato({ subsets: ["latin"], weight: ["400", "700"] });
 
@@ -15,10 +18,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={lato.className}>
-        <main className="max-w-6xl m-auto">{children}</main>
-      </body>
-    </html>
+    <>
+      <Navbar />
+      <Suspense>{children}</Suspense>
+      <Footer />
+    </>
   );
 }

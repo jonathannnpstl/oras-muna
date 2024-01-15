@@ -14,7 +14,7 @@ export default function HeroSection() {
         ></Image>
         <div className="h-full my-8 p-8 md:p-0">
           <div className="text-center md:text-right ">
-            <p className="text-2xl md:text-4xl lg:text-6xl tracking-wider">
+            <p className="text-3xl md:text-4xl lg:text-6xl tracking-wider">
               WEAR YOUR ELITE ELEGANCE
             </p>
             <p className="my-4">

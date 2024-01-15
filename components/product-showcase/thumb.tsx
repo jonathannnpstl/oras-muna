@@ -26,8 +26,9 @@ export const Thumb: React.FC<PropType> = (props) => {
           className="embla-thumbs__slide__img"
           src={imgSrc}
           alt="Your alt text"
-          width={100}
-          height={100}
+          width={40}
+          height={40}
+          style={{ width: "100px", height: "100px" }}
         />
       </button>
     </div>

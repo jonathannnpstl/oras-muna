@@ -11,6 +11,7 @@ export default function ProductCard({ product }: { product: Product }) {
       <Link href={`/product/${_id}`}>
         <div className="w-full px-2 sm:px-10 pt-2 ">
           <Image
+            priority={true}
             src={`${images[0]}`}
             width={150}
             height={0}

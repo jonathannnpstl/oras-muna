@@ -29,7 +29,6 @@ function Submit() {
 export default function DeleteItemButton({ id }: { id: string }) {
   const [message, formAction] = useFormState(removeItemFromCart, null);
   const actionWithId = formAction.bind(null, { id });
-  console.log(id);
 
   return (
     <form

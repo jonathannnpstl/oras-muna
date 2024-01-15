@@ -1,9 +1,7 @@
 import Filter from "@/components/filter";
 import { CardsSkeleton } from "@/components/skeleton";
 import StoreProvider from "./StoreProvider";
-
 import { Suspense } from "react";
-import { getFilters } from "@/lib/api/data";
 
 export default async function SearchLayout({
   children,
