@@ -25,7 +25,7 @@ export default function ProductCard({ product }: { product: Product }) {
           </p>
         </div>
         <div className="px-2 pb-2">
-          <p className="text-stone-950 text-sm sm:text-base">${price}</p>
+          <p className="text-stone-950 text-sm sm:text-base">Php {price}</p>
         </div>
       </Link>
     </div>

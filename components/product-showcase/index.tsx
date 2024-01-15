@@ -136,7 +136,7 @@ export default function ProductShowcase({ product, suggestedProducts }: any) {
             {product.name}
           </p>
           <p className="text-xl font-semibold text-gray-800 tracking-wide ">
-            ${product.price}
+            Php {product.price}
           </p>
           <div className="flex overflow-hidden items-center text-base">
             {/**

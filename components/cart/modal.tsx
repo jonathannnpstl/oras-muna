@@ -6,6 +6,7 @@ import EditQtyButton from "./edit-qty-button";
 import CloseButton from "./close-cart-button";
 import OpenCart from "./open-cart-button";
 import DeleteItemButton from "./delete-item-button";
+import Link from "next/link";
 
 export default function CartModal({ cart }: any) {
   const [quantity, setQuantity] = useState<number>(1);
@@ -157,12 +158,13 @@ export default function CartModal({ cart }: any) {
                     /> */}
                   </div>
                 </div>
-                <a
-                  // href={cart.checkoutUrl}
-                  className="block w-full  bg-blue-600 p-3 text-center text-sm font-medium text-white opacity-90 hover:opacity-100"
+                <Link
+                  onClick={closeCart}
+                  href={"/checkout"}
+                  className="block w-full  bg-black p-3 text-center text-sm font-medium text-white opacity-90 hover:opacity-100"
                 >
                   Proceed to Checkout
-                </a>
+                </Link>
               </div>
             </Dialog.Panel>
           </Transition.Child>

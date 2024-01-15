@@ -14,7 +14,8 @@ function Submit(prop: { type: string; stock: number }) {
       disabled={disable}
       type="submit"
       className={clsx("w-full h-full showcase-btn ", {
-        "cursor-not-allowed": disable,
+        "cursor-not-allowed bg-gray-300": disable,
+        "bg-black": !disable,
       })}
     >
       {pending ? (
@@ -70,7 +71,7 @@ export default function AddToCartButton({
    */
   return (
     <form
-      className="text-center flex-1 bg-black text-white w-full"
+      className="text-center flex-1  text-white w-full"
       action={actionWithId}
     >
       <Submit type={"cart"} stock={stock} />
