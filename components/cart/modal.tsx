@@ -10,7 +10,8 @@ import Link from "next/link";
 import clsx from "clsx";
 
 export default function CartModal({ cart }: any) {
-  const notDisable = cart && cart.products && cart.products.length > 0;
+  const notDisable: boolean = cart && cart.products && cart.products.length > 0;
+  const DynamicTag = notDisable ? Link : "p";
   const [quantity, setQuantity] = useState<number>(1);
   const [isOpen, setIsOpen] = useState(false);
   const quantityRef = useRef(cart?.totalQuantity);
@@ -160,18 +161,18 @@ export default function CartModal({ cart }: any) {
                     /> */}
                   </div>
                 </div>
-                <Link
+                <DynamicTag
                   onClick={closeCart}
                   href={"/checkout"}
                   className={clsx(
                     "block w-full bg-black p-3 text-center text-sm font-medium text-white opacity-90 hover:opacity-100",
                     notDisable ? "" : "cursor-not-allowed"
                   )}
-                  aria-disabled={notDisable}
-                  tabIndex={notDisable ? -1 : undefined}
+                  aria-disabled={!notDisable}
+                  tabIndex={!notDisable ? -1 : undefined}
                 >
                   Proceed to Checkout
-                </Link>
+                </DynamicTag>
               </div>
             </Dialog.Panel>
           </Transition.Child>
