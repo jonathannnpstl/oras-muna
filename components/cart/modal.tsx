@@ -7,8 +7,10 @@ import CloseButton from "./close-cart-button";
 import OpenCart from "./open-cart-button";
 import DeleteItemButton from "./delete-item-button";
 import Link from "next/link";
+import clsx from "clsx";
 
 export default function CartModal({ cart }: any) {
+  const notDisable = cart && cart.products && cart.products.length > 0;
   const [quantity, setQuantity] = useState<number>(1);
   const [isOpen, setIsOpen] = useState(false);
   const quantityRef = useRef(cart?.totalQuantity);
@@ -161,7 +163,12 @@ export default function CartModal({ cart }: any) {
                 <Link
                   onClick={closeCart}
                   href={"/checkout"}
-                  className="block w-full  bg-black p-3 text-center text-sm font-medium text-white opacity-90 hover:opacity-100"
+                  className={clsx(
+                    "block w-full bg-black p-3 text-center text-sm font-medium text-white opacity-90 hover:opacity-100",
+                    notDisable ? "" : "cursor-not-allowed"
+                  )}
+                  aria-disabled={notDisable}
+                  tabIndex={notDisable ? -1 : undefined}
                 >
                   Proceed to Checkout
                 </Link>
