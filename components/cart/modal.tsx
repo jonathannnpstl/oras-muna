@@ -100,10 +100,9 @@ export default function CartModal({ cart }: any) {
                               </div>
                               <div className="">
                                 <p className="text-right text-base">
-                                  $
+                                  Php
                                   {parseFloat(product.item.price) *
                                     parseFloat(product.qty)}{" "}
-                                  USD
                                 </p>
                                 <div className="ml-auto flex h-9 flex-row items-center  border">
                                   <EditQtyButton
@@ -137,7 +136,7 @@ export default function CartModal({ cart }: any) {
                   <div className="mb-3 flex items-center justify-between border-b border-neutral-200 pb-1 dark:border-neutral-700">
                     <p>Taxes</p>
                     <p className="text-right text-base">
-                      ${cart?.total ? 14 : 0}.00 USD
+                      Php{cart?.total ? 14 : 0}.00
                     </p>
                     {/* <Price
                         className="text-right text-base text-black dark:text-white"
@@ -152,7 +151,7 @@ export default function CartModal({ cart }: any) {
                   <div className="mb-3 flex items-center justify-between border-b border-neutral-200 pb-1 pt-1 dark:border-neutral-700">
                     <p>Total</p>
                     <p className="text-right text-base">
-                      ${cart?.total ? cart?.total + 14 : 0}.00 USD
+                      Php {cart?.total ? cart?.total + 14 : 0}.00
                     </p>
                     {/* <Price
                         className="text-right text-base text-black dark:text-white"
