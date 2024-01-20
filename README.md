@@ -1,4 +1,19 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Oras muna
+Oras-muna is an ecommerce website selling luxury watches. The technolgies used for building this website are Next.js, MongoDB, and Redux Toolkit. I develop this website because of my desire to learn Next.js and Redux. This website is deployed using Vercel.
+
+The features included in the ecommerce are the followings:
+- [x] Add to cart
+- [x] Search products
+- [x] Sort products by price, rating, popularity, and relevance.
+- [x] Filtering products
+- [x] Responsive design 
+- [x] Checkout form
+
+Possible features to be included in the future:
+- [ ]   User login
+- [ ]   Admin dashboard
+- [ ]   Payment gateway
+
 
 ## Getting Started
 
