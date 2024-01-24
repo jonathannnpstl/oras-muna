@@ -37,7 +37,7 @@ export default async function SearchPage({
 
   return (
     <>
-      <div className="w-full order-last min-h-screen md:order-none my-24 px-6">
+      <div className="w-full order-last min-h-screen md:order-none px-6">
         <Suspense key={searchValue}>
           <ProductsContent q={q} />
         </Suspense>

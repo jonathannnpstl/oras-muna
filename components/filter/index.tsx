@@ -62,7 +62,7 @@ export default function Filter() {
           >
             <XMarkIcon className="h-7 w-7 ml-auto mr-8" />
           </div>
-          <div className="md:my-20 my-5 relative h-full md:px-0 px-4">
+          <div className="my-5 relative h-full md:px-0 px-4">
             {filters && !loading
               ? filters.map((filter, i) => (
                   <CheckboxFilter

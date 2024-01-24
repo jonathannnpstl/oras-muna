@@ -11,7 +11,7 @@ export default async function SearchLayout({
   return (
     <StoreProvider>
       <Suspense>
-        <div className="mx-auto flex max-w-screen-2xl flex-row gap-8 pb-4 text-black md:flex-row ">
+        <div className="mx-auto flex max-w-screen-2xl flex-row gap-8 pb-4 text-black md:flex-row my-24">
           <Suspense fallback={<CardsSkeleton />}>
             <Filter />
           </Suspense>
