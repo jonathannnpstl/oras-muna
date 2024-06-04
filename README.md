@@ -13,6 +13,7 @@ Possible features to be included in the future:
 - [ ]   User login
 - [ ]   Admin dashboard
 - [ ]   Payment gateway
+- [ ]   Adaptabilty to dark and light mode.
 
 
 ## Getting Started
